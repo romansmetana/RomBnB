@@ -9,4 +9,7 @@ AllCops:
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
     - '.git/**/*'
-    - 'bin/*'  
+    - 'bin/*'
+
+Style/Documentation:
+  Enabled: false  
