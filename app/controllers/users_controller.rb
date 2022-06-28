@@ -7,8 +7,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash.notice = 'Profile successfully updated'
+      flash[:success] = 'Profile successfully updated'
       redirect_to root_path
+    else
+      flash[:danger] = 'Profile successfully updated'
     end
   end
 

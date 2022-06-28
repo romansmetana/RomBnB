@@ -1,0 +1,20 @@
+.text-color {
+    color: white;
+ }
+ 
+ .text-color:hover {
+    color: rgb(255, 243, 190);
+ }
+ 
+ .hehe .hehe-link {
+    box-shadow: inset 0 0 0 1px none;
+    border-radius: 0.5rem;
+    padding: 0.6rem;
+    color: #fff;
+    text-decoration: none;
+ }
+ 
+ .hehe .hehe-link:hover {
+    box-shadow: inset 0 0 0 1px rgb(255, 243, 190);
+ }
+ 
