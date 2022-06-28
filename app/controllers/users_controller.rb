@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  def index; end
+  def index 
+    @user = current_user
+  end
 
   def edit; end
 
