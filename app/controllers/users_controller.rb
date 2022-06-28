@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user
-  before_action :user_params, only: [ :update ]
+  before_action :user_params, only: [:update]
   def index; end
 
   def edit; end
 
   def update
     if @user.update(user_params)
+      flash.notice = 'Data successfully updated'
       redirect_to root_path
     end
   end
