@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash.notice = 'Data successfully updated'
+      flash.notice = 'Profile successfully updated'
       redirect_to root_path
     end
   end

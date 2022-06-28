@@ -12,16 +12,9 @@
   </head>
   <body>
     <% if user_signed_in? %>
-      <header>
-        <div>
-          <nav>
-            <%= link_to "Edit profile", edit_user_path(@user) %>
-            <%= link_to 'Logout', destroy_user_session_path %>
-          </nav>
-        </div>
-      </header>
+      <%= render 'shared/header' %>
     <% else %>
-      Please Sign In or Sign Up
+      <%= render 'devise/shared/header_sign_in' %>
     <% end %>
     <main>
       <%= yield %>
