@@ -11,13 +11,18 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <header>
-      <div>
-        <nav>
-          <%= link_to "Edit", edit_user_path(@user) %>
-        </nav>
-      </div>
-    </header>
+    <% if user_signed_in? %>
+      <header>
+        <div>
+          <nav>
+            <%= link_to "Edit profile", edit_user_path(@user) %>
+            <%= link_to 'Logout', destroy_user_session_path %>
+          </nav>
+        </div>
+      </header>
+    <% else %>
+      Please Sign In or Sign Up
+    <% end %>
     <main>
       <%= yield %>
     </main>
