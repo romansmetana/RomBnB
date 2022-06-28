@@ -11,6 +11,15 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%= yield %>
+    <header>
+      <div>
+        <nav>
+          <%= link_to "Edit", edit_user_path(@user) %>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
