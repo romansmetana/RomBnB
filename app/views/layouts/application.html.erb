@@ -15,6 +15,7 @@
       <%= render 'shared/header' %>
     <% else %>
       <%= render 'devise/shared/header_sign_in' %>
+      <%= render "devise/shared/error_messages", resource: resource %>
     <% end %>
     <main>
       <div class="mt-4 row d-flex justify-content-center">
@@ -26,7 +27,6 @@
           <% end %>
         </div>
       </div>
-      <%= render "devise/shared/error_messages", resource: resource %>
       <%= yield %>
     </main>
   </body>
