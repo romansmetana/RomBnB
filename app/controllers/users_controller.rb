@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Profile successfully updated'
       redirect_to root_path
     else
-      flash[:danger] = 'Profile successfully updated'
+      flash[:danger] = 'Something wrong...'
     end
   end
 
