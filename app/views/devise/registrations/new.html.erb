@@ -1,6 +1,6 @@
 <h2 class="text-center">Sign up</h2>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), local: true, data: { turbo: false }) do |f| %>
+
   <div class='small-middle-container_up container-border'>
     <div class="form-outline">
       <div class="form-outline">

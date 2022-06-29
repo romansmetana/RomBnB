@@ -7,9 +7,13 @@
        %>
     </h2>
     <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+      <div class="mt-4 row d-flex justify-content-center">
+        <div class="col-md-5 col-md-offset-2">
+          <% resource.errors.full_messages.each do |msg| %>
+            <p class=' alert alert-danger'><%= msg %></p>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 <% end %>

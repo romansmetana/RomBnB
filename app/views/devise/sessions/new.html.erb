@@ -1,5 +1,5 @@
 <h2 class='text-center mt-3'>Log In</h2>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), local: true, data: { turbo: false }) do |f| %>
 <div class='small-middle-container container-border'>
   <div class="form-outline mb-4">
     <%= f.label :email, class: 'form-label h5' %><br />
