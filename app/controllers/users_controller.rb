@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash[:danger] = 'Something wrong...'
+      redirect_to edit_user_path
     end
   end
 
