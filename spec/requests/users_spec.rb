@@ -1,9 +1,14 @@
 require 'rails_helper'
+RSpec.describe UsersController, type: :controller do
+  let(:user) { create(:user) }
 
-RSpec.describe 'Users', type: :request do
+  before do
+    sign_in(user)
+  end
+
   describe 'GET /index' do
     it 'returns http success' do
-      get '/users/index'
+      get :index
       expect(response).to have_http_status(:success)
     end
   end
