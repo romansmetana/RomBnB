@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user
-  before_action :user_params, only: [:update]
   def index; end
 
   def edit; end
@@ -11,7 +10,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash[:danger] = 'Something wrong...'
-      redirect_to edit_user_path
+      redirect_to edit_user_path(@user)
     end
   end
 

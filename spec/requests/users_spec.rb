@@ -23,15 +23,19 @@ RSpec.describe UsersController, type: :controller do
       expect(user.email).to eq('roman@new.com')
       expect(response).to redirect_to(root_path)
     end
+    
+    context "when update is fail" do
+      let(:params) { { user:{first_name: '', email: user.email} , id: user.id } }
+     
+      it 'update failed' do
+        put :update, params: params
 
-    it 'update failed' do
-      params[:user][:first_name] = ''
-      put :update, params: params
-      
-      user.reload
-      expect(user.first_name).to_not eq('Roman')
-      expect(user.email).to_not eq('new@new.com')
-      expect(response).to redirect_to(edit_user_path)
+        user.reload
+        expect(user.first_name).to eq(user.first_name)
+        expect(user.email).to eq(user.email)
+        expect(response).to redirect_to(edit_user_path)
+      end
     end
+  
   end
 end
