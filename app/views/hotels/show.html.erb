@@ -1,2 +1,46 @@
-<h1>Hotels#show</h1>
-<p>Find me in app/views/hotels/show.html.erb</p>
+<h1 class='text-center mb-4'>Rooms in <%= @hotel.name %> Hotel</h1>
+<% @hotel.rooms.each do |room| %>
+  <div class="container container-border mb-5">
+    <table>
+      <thead>
+        <tr>
+          <th class='col-sm-3'></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='d-flex justify-content-between'>
+          <td>
+            <div class='me-2 d-flex align-items-center'>
+              <img src="https://fakeimg.pl/250x200/">
+            </div>
+          </td>
+          <td class='ms-2 col-5 d-flex align-items-start flex-column border-end'>
+            <h3 class='mb-auto'><%= link_to room.name  %></h3>
+            <div class='mt-2'>
+              <p><%= room.single_bed %></p>
+              <p><%= room.double_bed %></p>
+              <p><%= room.square %> m²</p>
+            </div>
+          </td>
+          <td class='ms-2 col-5 d-flex  flex-column border-end'>
+            <h5 class='mb-auto'>Capacity</h4>
+            <p><%= room.capacity %></p>
+          </td>
+          <td class='ms-2 col-5 d-flex  flex-column border-end'>
+            <h5 class='mb-auto'>Price</h5>
+            <p><%=number_to_currency(room.price) %></p>
+          </td>
+          <td class='ms-2  d-flex flex-column gap-5'>
+            <h5>Count</h5>
+            <p class='text-center'><%= room.count %></p>
+            <h6 class='text-center'><%= link_to 'Reserve' %></h6>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
