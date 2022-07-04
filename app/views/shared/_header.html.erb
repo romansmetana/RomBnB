@@ -1,13 +1,13 @@
 <header class="bg-info">
   <div class='container d-flex align-items-center' style="height: 4.3rem">
     <div class="w-100 d-flex flex-wrap align-items-center justify-content-around">
-      <ul class="nav col-sm col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0 gap-3">
+      <div class="nav col-md-4  mb-2 justify-content-start mb-md-0 gap-3">
         <li><%= link_to 'Home', root_path, class: 'h4 text-color  text-decoration-none' %></li>
-      </ul>
-      <ul class="nav col-sm col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 gap-3">
+      </div>
+      <div class="nav col-md-4 mb-2 justify-content-center mb-md-0 gap-3">
         <li><%= link_to 'RomBnB', root_path, class: 'display-6 fw-bold text-white text-decoration-none' %></li>
-      </ul>
-      <div class="own-drop dropdown d-flex justify-content-end">
+      </div>
+      <div class="col-md-4 own-drop dropdown d-flex justify-content-end">
         <a class="own-drop-link tn dropdown-toggle text-white" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <div class='h5 d-inline text-white'><%= @user.first_name %> <%= @user.last_name %></div>
         </a>
