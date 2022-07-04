@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   add_flash_types :danger, :info, :warning, :success
 
   protected
+
   def set_user
     @user = current_user
   end
-  
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |u|

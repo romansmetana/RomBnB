@@ -5,8 +5,8 @@ class HotelsController < ApplicationController
     @hotels_count = Hotel.count
   end
 
-  def show
-  end
+  def show; end
+
   private
 
   def set_hotel

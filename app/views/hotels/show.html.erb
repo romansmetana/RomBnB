@@ -1,4 +1,4 @@
-<h1 class='text-center mb-4'>Rooms in <%= @hotel.name %> Hotel</h1>
+<h4 class='text-center mb-5'>Rooms in <%= @hotel.name %> Hotel</h4>
 <% @hotel.rooms.each do |room| %>
   <div class="container container-border mb-5">
     <table>
@@ -21,26 +21,34 @@
           <td class='ms-2 col-5 d-flex align-items-start flex-column border-end'>
             <h3 class='mb-auto'><%= link_to room.name  %></h3>
             <div class='mt-2'>
-              <p><%= room.single_bed %></p>
-              <p><%= room.double_bed %></p>
-              <p><%= room.square %> m²</p>
-            </div>
-          </td>
-          <td class='ms-2 col-5 d-flex  flex-column border-end'>
-            <h5 class='mb-auto'>Capacity</h4>
-            <p><%= room.capacity %></p>
-          </td>
-          <td class='ms-2 col-5 d-flex  flex-column border-end'>
-            <h5 class='mb-auto'>Price</h5>
-            <p><%=number_to_currency(room.price) %></p>
-          </td>
-          <td class='ms-2  d-flex flex-column gap-5'>
-            <h5>Count</h5>
-            <p class='text-center'><%= room.count %></p>
-            <h6 class='text-center'><%= link_to 'Reserve' %></h6>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+              <p>
+                <% if room.single_bed %>
+                  <p><i class="fa-solid fa-bed"></i> x <%= room.single_bed %></p>
+                <% end %></i>
+            </p>
+            <p>
+              <% if room.double_bed %>
+                <p><%= show_svg('double-bed.svg') %> x <%= room.double_bed %></p>
+              <% end %>
+            </p>
+            <p><i class="fa-solid fa-house"></i> <%= room.square %> m²</p>
+          </div>
+        </td>
+        <td class='ms-2 col-5 d-flex  flex-column border-end'>
+          <h5 class='mb-auto'>Capacity</h4>
+          <p><%= room.capacity %></p>
+        </td>
+        <td class='ms-2 col-5 d-flex  flex-column border-end'>
+          <h5 class='mb-auto'>Price</h5>
+          <p><%=number_to_currency(room.price) %></p>
+        </td>
+        <td class='ms-2  d-flex flex-column gap-5'>
+          <h5>Count</h5>
+          <p class='text-center'><%= room.count %></p>
+          <h6 class='text-center'><%= link_to 'Reserve' %></h6>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <% end %>

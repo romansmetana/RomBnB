@@ -15,6 +15,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET /update' do
     let(:params) { { user: { first_name: 'Roman', email: 'roman@new.com' }, id: user.id } }
+
     it 'update success' do
       put :update, params: params
 
@@ -23,10 +24,10 @@ RSpec.describe UsersController, type: :controller do
       expect(user.email).to eq('roman@new.com')
       expect(response).to redirect_to(root_path)
     end
-    
-    context "when update is fail" do
-      let(:params) { { user:{first_name: '', email: user.email} , id: user.id } }
-     
+
+    context 'when update is fail' do
+      let(:params) { { user: { first_name: '', email: user.email }, id: user.id } }
+
       it 'update failed' do
         put :update, params: params
 
@@ -36,6 +37,5 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to(edit_user_path)
       end
     end
-  
   end
 end
