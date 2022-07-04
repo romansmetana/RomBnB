@@ -3,7 +3,7 @@
   <div class='me-2 col-sm-3 d-flex align-items-center'>
     <img src="https://fakeimg.pl/250x200/">
   </div>
-  <div class='col-sm-9 text-dark d-flex align-items-start flex-column bd-highlight'>
+  <div class='text-dark d-flex align-items-start justify-content-between'>
     <% @hotels.each do |hotel| %>
       <div>
         <div class='mb-auto p-2'>
@@ -14,9 +14,16 @@
           <h6><%= hotel.address %></h6>
           <h6><%= hotel.city %></h6>
         </div>
+        <div class='d-flex flex-wrap w-75'>
+          <%= render hotel.labels %>
+        </div>
       </div>
-      <div class='d-flex flex-wrap w-50'>
-        <%= render hotel.labels %>
+      <div>
+        <p class='p-2'>Rooms:</p>
+        <% hotel.rooms.minmax.each do |room| %>
+          <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= room.price %></span>  dollars</h5>
+        <% end %>
+        <h4 class='btn btn-info' ><%= link_to "Show more", hotels_show_path(id: hotel.id), class: 'text-decoration-none text-white'%></h4>
       </div>
     <% end %>
   </div>
