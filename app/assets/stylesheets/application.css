@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+ .custom-bg-light{
+    background: #e9ecef;
+ }
+
+ .verticaltext{
+    width:1px;
+    word-wrap: break-word;
+    white-space:pre-wrap; 
+ }
