@@ -23,7 +23,7 @@
         <% hotel.rooms.minmax.each do |room| %>
           <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= room.price %></span>  dollars</h5>
         <% end %>
-        <h4 class='btn btn-info' ><%= link_to "Show more", hotels_show_path(id: hotel.id), class: 'text-decoration-none text-white'%></h4>
+        <h4 class='btn btn-info' ><%= link_to "Show more", hotel_path(hotel), class: 'text-decoration-none text-white'%></h4>
       </div>
     <% end %>
   </div>

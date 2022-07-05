@@ -10,9 +10,13 @@ AllCops:
     - 'tmp/**/*'
     - '.git/**/*'
     - 'bin/*'
+    - 'spec/*'
 
 Style/Documentation:
   Enabled: false  
 
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+RSpec/MultipleExpectations:
   Enabled: false
