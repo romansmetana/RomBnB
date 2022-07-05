@@ -14,7 +14,8 @@
  *= require_self
  */
  .custom-bg-light{
-    background: #e9ecef;
+    /*background: #e9ecef;*/
+    background: #0dcaf00f;
  }
 
  .verticaltext{
