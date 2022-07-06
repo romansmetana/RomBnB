@@ -6,9 +6,6 @@ class ReservationsController < ApplicationController
     
     def create
         if session[:reservation_id]
-            
-            binding.pry
-            
             flash[:warning] = "You have already booked"
             redirect_to reservations_path
         else
