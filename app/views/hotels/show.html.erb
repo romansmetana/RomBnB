@@ -1,4 +1,5 @@
 <h4 class='text-center mb-5'><%= @hotel.name %></h4>
+
 <% @hotel.rooms.each do |room| %>
   <div class="d-flex container-my container-border mb-5">
     <div class='me-2 col-4 d-flex align-items-center'>
@@ -24,7 +25,7 @@
       <h5 class='text-secondary'>Count</h5>
       <h5><%= room.count %></h5>
     </div>
-    <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-primary'>
+    <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-green'>
       <h6 class="verticaltext"><%= link_to 'Reservе', reservations_path(room_id: room.id, user_id: current_user.id), data: { "turbo-method": :post }, class: "text-decoration-none fs-5 fw-light text-primary link-dark" %></h6>
     </div>
   </div>
