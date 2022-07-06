@@ -13,10 +13,13 @@
  *= require_tree .
  *= require_self
  */
- .custom-bg-light{
-    /*background: #e9ecef;*/
-    background: #0dcaf00f;
- }
+ .custom-bg-green{
+   /*background: #e9ecef;*/
+   background: #33f00d2b;
+}
+.custom-bg-danger{
+   background: rgba(255, 0, 0, 0.115);
+}
 
  .verticaltext{
     width:1px;
