@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :users, only: %i[index edit update]
   resources :hotels
+  resources :reservations, only: %i[ index new create destroy ]
   # Defines the root path route ("/")
   root to: 'hotels#index'
 end
