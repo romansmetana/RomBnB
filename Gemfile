@@ -9,6 +9,8 @@ ruby '3.0.2'
 gem 'rails', '~> 7.0.3'
 
 gem 'devise'
+
+gem 'pundit'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
