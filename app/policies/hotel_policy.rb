@@ -1,8 +1,11 @@
 class HotelPolicy < ApplicationPolicy
-  class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+  class Scope < Scope   
+    def resolve
+      if @user.owner?
+        scope.where(user_id: @user.id)
+      else
+        scope.all
+      end
+    end
   end
 end

@@ -1,7 +1,7 @@
 class HotelsController < ApplicationController
   before_action :set_hotel, only: [:show]
   def index
-    @hotels = Hotel.all
+    @hotels = policy_scope(Hotel).all
     @hotels_count = Hotel.count
   end
 
