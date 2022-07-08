@@ -1,5 +1,6 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: [ :show ]
+  before_action :set_hotel, only: %i[ show edit ]
+  before_action :set_labels, only: %i[ new edit ]
   def index
     @hotels = policy_scope(Hotel).all
     @hotels_count = policy_scope(Hotel).count
@@ -8,7 +9,6 @@ class HotelsController < ApplicationController
   def show; end
 
   def new
-    @labels = Label.all
     @hotel = Hotel.new
     authorize @hotel
   end
@@ -25,12 +25,23 @@ class HotelsController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    
+  end
+  
   
 
   private
   def hotel_params
     params.require(:hotel).permit(:name, :address, :description, :city, label_ids: []).merge(:user_id => @user.id)
   end
+
+  def set_labels
+    @labels = Label.all
+  end
+  
   
   def set_hotel
     @hotel = Hotel.find(params[:id])

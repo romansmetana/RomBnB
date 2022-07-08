@@ -27,7 +27,10 @@
             <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= number_to_currency(room.price) %></span></h5>
           <% end %>
         <% end %>
-        <h4 class='btn btn-info' ><%= link_to "Show more", hotel_path(hotel), class: 'text-decoration-none text-white'%></h4>
+        <div class='d-flex gap-3'>
+          <h4 class='btn btn-info' ><%= link_to "Show more", hotel_path(hotel), class: 'text-decoration-none text-white'%></h4>
+          <h4 class='btn btn-warning' ><%= link_to "Edit", edit_hotel_path(hotel), class: 'text-decoration-none text-white'%></h4>
+        </div>
       </div>
     </div>
   </div>
