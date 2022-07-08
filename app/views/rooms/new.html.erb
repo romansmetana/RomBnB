@@ -1,0 +1,43 @@
+<%= form_with url:  hotel_rooms_path(hotel_id: @hotel.id) do |f| %>
+  <div class='container'>
+    <div class='d-flex justify-content-center gap-5'>
+      <div>
+        <div class="form-outline mb-4">
+          <%= f.label :name, class: 'form-label h5 d-block' %>
+          <%= f.text_field :name, class: "form-control", placeholder: 'For two person' %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :price, class: 'form-label h5 d-block' %>
+          <%= f.number_field :price, class: "form-control", placeholder: '130.00' %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :square, class: 'form-label h5 d-block' %>
+          <%= f.number_field :square, class: "form-control", placeholder: 'Square one room' %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :capacity, class: 'form-label h5 d-block' %>
+          <%= f.number_field :capacity, class: "form-control", placeholder: 'For how many people' %>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-outline mb-4">
+          <%= f.label :count, class: 'form-label h5 d-block' %>
+          <%= f.number_field :count, class: "form-control", placeholder: 'Count of that type of room ' %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :double_bed, class: 'form-label h5 d-block' %>
+          <%= f.number_field :double_bed, class: "form-control", placeholder: 'Count of that type of room ' %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :single_bed, class: 'form-label h5 d-block' %>
+          <%= f.number_field :single_bed, class: "form-control", placeholder: 'Count of that type of room ' %>
+        </div>
+        
+        <div class="actions">
+          <%= f.submit "Add", class: "btn btn-info btn-block mb-3 mt-3", style: 'width: 100px' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
