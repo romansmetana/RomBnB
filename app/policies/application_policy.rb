@@ -17,7 +17,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    @user.owner?
   end
 
   def new?

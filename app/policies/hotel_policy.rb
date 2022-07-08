@@ -7,5 +7,14 @@ class HotelPolicy < ApplicationPolicy
         scope.all
       end
     end
+
+    def new?
+      create?
+    end
+    
+    def create?
+      @user.owner?
+    end
+    
   end
 end
