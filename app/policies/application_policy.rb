@@ -25,7 +25,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    @user.owner?
   end
 
   def edit?

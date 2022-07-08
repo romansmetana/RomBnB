@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: %i[ show edit ]
+  before_action :set_hotel, only: %i[ show edit update ]
   before_action :set_labels, only: %i[ new edit ]
   def index
     @hotels = policy_scope(Hotel).all
@@ -25,10 +25,19 @@ class HotelsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @hotel
+  end
 
   def update
-    
+    authorize @hotel
+    if @hotel.update(hotel_params)
+      flash[:success] = 'Hotel was successfuly updated'
+      redirect_to root_path
+    else
+      flash[:danger] = 'Something wrong..'
+      redirect_to root_path
+    end
   end
   
   

@@ -16,5 +16,13 @@ class HotelPolicy < ApplicationPolicy
       @user.owner?
     end
     
+    def edit?
+      udpdate?
+    end
+    
+    def update?
+      @user.owner?
+    end
+    
   end
 end
