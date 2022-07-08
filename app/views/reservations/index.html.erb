@@ -1,10 +1,10 @@
 <% if @reservations.empty? %>
   <h3 class='alert alert-warning text-center'>You don't have any reservations</h3>
-  <h6 class='text-center'>To book a room: <%= link_to "booking", root_path, class: 'text-decoration-none' %></h6>
+  <h6 class='text-center text-secondary'>To book a room: <%= link_to "booking", root_path, class: 'text-decoration-none' %></h6>
 <% else %>
   <div class='container'>
     <% @reservations.each do |r| %>
-      <h3 class='text-center'>Your reservation</h4>
+      <h3 class='text-center text-secondary'>You have <%= pluralize(@reservation_count, "reservation") %></h4>
       <div class='mb-5'>
         <h6 class='text-secondary'>Name: <span class='text-dark h5'><%= r.user.first_name %></span></h6>
         <h6 class='text-secondary'>Last name: <span class='text-dark h5'><%= r.user.last_name %></span></h6>
