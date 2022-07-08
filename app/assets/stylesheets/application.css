@@ -20,6 +20,9 @@
 .custom-bg-danger{
    background: rgba(255, 0, 0, 0.115);
 }
+.custom-bg-warning{
+   background: rgba(255, 208, 0, 0.206);
+}
 
  .verticaltext{
     width:1px;
