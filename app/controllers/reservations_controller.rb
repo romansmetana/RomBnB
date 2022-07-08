@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   include ReservationsHelper
    def index
-    @reservations = Resrvation.all
+    @reservations = policy_scope(Resrvation).all
   end
 
   def create
@@ -10,6 +10,7 @@ class ReservationsController < ApplicationController
       redirect_to reservations_path
     else
       @reservation = Resrvation.create(reserv_params)
+      authorize @reservation
       if @reservation.save
         session[:reservation_id] = @reservation.id
         room_count(@reservation.room_id)
