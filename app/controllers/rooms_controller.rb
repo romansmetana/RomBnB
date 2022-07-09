@@ -1,11 +1,11 @@
 class RoomsController < ApplicationController
+    before_action :set_hotel, only: %i[ new create ]
     def new
-        @hotel = Hotel.find(params[:hotel_id])
         @room = Room.new
     end
 
     def create
-        @room = Room.create(room_params)
+        @room = @hotel.rooms.build(room_params)
         if @room.save
             flash[:success] = 'Room was successfuly created'
             redirect_to root_path
@@ -16,6 +16,10 @@ class RoomsController < ApplicationController
     end
     private
 
+    def set_hotel
+        @hotel = Hotel.find(params[:hotel_id])
+    end
+    
     def room_params
        params.permit(:name, :price, :square, :capacity, :count, :double_bed, :single_bed, :hotel_id) 
     end
