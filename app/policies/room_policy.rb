@@ -8,7 +8,7 @@ class RoomPolicy < ApplicationPolicy
   def new?
     create?
   end
-  
+
   def create?
     @user.owner?
   end

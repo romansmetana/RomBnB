@@ -9,8 +9,7 @@ class ResrvationPolicy < ApplicationPolicy
     end
   end
 
-    def create?
-      @user.owner? == false
-    end
-    
+  def create?
+    @user.owner? == false
+  end
 end

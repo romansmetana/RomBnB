@@ -1,8 +1,8 @@
 class ReservationsController < ApplicationController
   include ReservationsHelper
-   def index
+  def index
     @reservations = policy_scope(Resrvation).all
-    @reservation_count = Resrvation.count
+    @reservation_count = policy_scope(Resrvation).count
   end
 
   def create

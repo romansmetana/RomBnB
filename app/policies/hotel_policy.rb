@@ -1,5 +1,5 @@
 class HotelPolicy < ApplicationPolicy
-  class Scope < Scope   
+  class Scope < Scope
     def resolve
       if @user.owner?
         scope.where(user_id: @user.id)
