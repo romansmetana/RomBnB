@@ -7,10 +7,10 @@ class ResrvationPolicy < ApplicationPolicy
         scope.where(user_id: @user.id)
       end
     end
+  end
 
     def create?
       @user.owner? == false
     end
     
-  end
 end

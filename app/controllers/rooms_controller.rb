@@ -3,10 +3,12 @@ class RoomsController < ApplicationController
     before_action :set_room, only: %i[edit update]
     def new
         @room = Room.new
+        authorize @room
     end
 
     def create
         @room = @hotel.rooms.build(room_params)
+        authorize @room
         if @room.save
             flash[:success] = 'Room was successfuly created'
             redirect_to root_path
@@ -17,10 +19,11 @@ class RoomsController < ApplicationController
     end
 
     def edit
-
+        authorize @room
     end
 
     def update
+        authorize @room
         if @room.update(room_params_require)
             flash[:success] = 'Room was successfuly updated'
             redirect_to root_path

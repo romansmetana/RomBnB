@@ -7,22 +7,21 @@ class HotelPolicy < ApplicationPolicy
         scope.all
       end
     end
+  end
 
-    def new?
-      create?
-    end
-    
-    def create?
-      @user.owner?
-    end
-    
-    def edit?
-      udpdate?
-    end
-    
-    def update?
-      @user.owner?
-    end
-    
+  def create?
+    @user.owner?
+  end
+
+  def new?
+    create?
+  end
+
+  def update?
+    @user.owner?
+  end
+
+  def edit?
+    update?
   end
 end

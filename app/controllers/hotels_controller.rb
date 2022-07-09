@@ -1,6 +1,7 @@
 class HotelsController < ApplicationController
   before_action :set_hotel, only: %i[ show edit update ]
   before_action :set_labels, only: %i[ new edit ]
+
   def index
     @hotels = policy_scope(Hotel).all
     @hotels_count = policy_scope(Hotel).count
