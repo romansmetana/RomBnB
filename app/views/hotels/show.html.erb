@@ -26,7 +26,7 @@
     </div>
     <% if @user.owner? %>
       <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-warning'>
-        <h6 class="verticaltext"><%= link_to 'Edit', edit_user_path(@user), class: "text-decoration-none fs-5 fw-light text-primary link-dark " %></h6>
+        <h6 class="verticaltext"><%= link_to 'Edit',  edit_hotel_room_path(@hotel, room), class: "text-decoration-none fs-5 fw-light text-primary link-dark " %></h6>
       </div>
     <% else %>
       <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-green'>
