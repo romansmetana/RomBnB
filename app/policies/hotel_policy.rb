@@ -13,15 +13,8 @@ class HotelPolicy < ApplicationPolicy
     @user.owner?
   end
 
-  def new?
-    create?
-  end
-
   def update?
     @user.owner?
   end
 
-  def edit?
-    update?
-  end
 end

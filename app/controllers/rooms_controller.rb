@@ -2,8 +2,8 @@ class RoomsController < ApplicationController
   before_action :set_hotel, only: %i[new create edit update]
   before_action :set_room, only: %i[edit update]
   def new
+    authorize Room
     @room = Room.new
-    authorize @room
   end
 
   def create

@@ -15,9 +15,8 @@ class HotelsController < ApplicationController
   end
 
   def create
-    @hotel = Hotel.create(hotel_params)
-    authorize @hotel
-    if @hotel.save
+    authorize Hotel
+    if current_user.hotels.create(hotel_params)
       flash[:success] = 'Hotel was successfuly created'
     else
       flash[:danger] = 'Something wrong..'
@@ -42,7 +41,7 @@ class HotelsController < ApplicationController
   private
 
   def hotel_params
-    params.require(:hotel).permit(:name, :address, :description, :city, label_ids: []).merge(user_id: @user.id)
+    params.require(:hotel).permit(:name, :address, :description, :city, label_ids: [])
   end
 
   def set_labels

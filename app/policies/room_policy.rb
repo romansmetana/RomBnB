@@ -5,18 +5,11 @@ class RoomPolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    create?
-  end
-
+  
   def create?
     @user.owner?
   end
-
-  def edit?
-    update?
-  end
-
+  
   def update?
     @user.owner?
   end
