@@ -13,4 +13,8 @@ class RoomPolicy < ApplicationPolicy
   def update?
     @user.owner?
   end
+
+  def destory?
+    @user.owner?
+  end
 end

@@ -10,8 +10,8 @@ class HotelsController < ApplicationController
   def show; end
 
   def new
+    authorize Hotel
     @hotel = Hotel.new
-    authorize @hotel
   end
 
   def create
@@ -39,6 +39,7 @@ class HotelsController < ApplicationController
   end
 
   def destroy
+    authorize @hotel
     if @hotel.destroy
       flash[:success] = 'Room was successfuly destroy'
     else

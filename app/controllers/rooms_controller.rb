@@ -7,8 +7,8 @@ class RoomsController < ApplicationController
   end
 
   def create
+    authorize Room
     @room = @hotel.rooms.build(room_params)
-    authorize @room
     if @room.save
       flash[:success] = 'Room was successfuly created'
     else
@@ -32,6 +32,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
+    authorize @room
     if @room.destroy
       flash[:success] = 'Room was successfuly destroy'
     else
