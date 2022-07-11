@@ -12,5 +12,3 @@ tag2 = Label.create(title: 'Parking', icon: 'fa-solid fa-square-parking')
 tag3 = Label.create(title: 'Spa', icon: 'fa-solid fa-spa')
 tag4 = Label.create(title: 'Gym', icon: 'fa-solid fa-dumbbell')
 tag5 = Label.create(title: 'Pets', icon: 'fa-solid fa-paw')
-
-

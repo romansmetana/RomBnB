@@ -20,5 +20,4 @@ class HotelPolicy < ApplicationPolicy
   def destroy?
     @user.owner?
   end
-
 end

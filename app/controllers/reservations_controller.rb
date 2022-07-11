@@ -9,8 +9,8 @@ class ReservationsController < ApplicationController
       flash[:warning] = 'You have already booked'
       redirect_to reservations_path
     else
+      authorize Resrvation
       @reservation = Resrvation.create(reserv_params)
-      authorize @reservation
       if @reservation.save
         session[:reservation_id] = @reservation.id
         room_count(@reservation.room_id)

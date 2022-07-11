@@ -42,7 +42,6 @@ class RoomsController < ApplicationController
       flash[:danger] = 'Something wrong..'
     end
   end
-  
 
   private
 

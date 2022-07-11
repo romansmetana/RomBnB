@@ -6,5 +6,5 @@ class Room < ApplicationRecord
   validates :price, presence: true, length: { minimum: 1 }
   validates :square, presence: true, length: { minimum: 1 }
   validates :capacity, presence: true, length: { minimum: 1 }
-  validates :count, presence: true, length: { minimum: 1}
+  validates :count, presence: true, length: { minimum: 1 }
 end

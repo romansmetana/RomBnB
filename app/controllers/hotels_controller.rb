@@ -51,9 +51,8 @@ class HotelsController < ApplicationController
       flash[:success] = 'Room was successfuly destroy'
     else
       flash[:danger] = 'Something wrong..'
-    end 
+    end
   end
-  
 
   private
 
