@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: %i[show edit update]
+  before_action :set_hotel, only: %i[show edit update destroy]
   before_action :set_labels, only: %i[new edit]
 
   def index
@@ -37,6 +37,15 @@ class HotelsController < ApplicationController
     end
     redirect_to root_path
   end
+
+  def destroy
+    if @hotel.destroy
+      flash[:success] = 'Room was successfuly destroy'
+    else
+      flash[:danger] = 'Something wrong..'
+    end 
+  end
+  
 
   private
 

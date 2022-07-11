@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :set_hotel, only: %i[new create edit update]
-  before_action :set_room, only: %i[edit update]
+  before_action :set_hotel, only: %i[new create edit update destroy]
+  before_action :set_room, only: %i[edit update destroy]
   def new
     authorize Room
     @room = Room.new
@@ -30,6 +30,15 @@ class RoomsController < ApplicationController
     end
     redirect_to root_path
   end
+
+  def destroy
+    if @room.destroy
+      flash[:success] = 'Room was successfuly destroy'
+    else
+      flash[:danger] = 'Something wrong..'
+    end
+  end
+  
 
   private
 

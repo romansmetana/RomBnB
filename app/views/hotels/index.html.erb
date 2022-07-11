@@ -34,6 +34,7 @@
           </div>
         <% end %>
         <h4 class='btn btn-info' ><%= link_to "Show more", hotel_path(hotel), class: 'text-decoration-none text-white'%></h4>
+        <p><%= link_to 'Delete', hotel_path(hotel), data: { "turbo-method": :delete }, class: 'btn btn-danger btn-sm' %></p>
       </div>
     </div>
   </div>
