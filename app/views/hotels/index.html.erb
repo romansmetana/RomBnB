@@ -23,7 +23,7 @@
         <% if hotel.rooms.empty? %>
           <h4>Haven't any rooms</h4>
         <% else %>
-          <% hotel.rooms.minmax.each do |room| %>
+          <% hotel.rooms.minmax{ |a, b| a.price <=> b.price }.each do |room| %>
             <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= number_to_currency(room.price) %></span></h5>
           <% end %>
         <% end %>
