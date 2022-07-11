@@ -11,10 +11,13 @@ class RoomsController < ApplicationController
     @room = @hotel.rooms.build(room_params)
     if @room.save
       flash[:success] = 'Room was successfuly created'
+      redirect_to root_path
     else
-      flash[:danger] = 'Something wrong..'
+      flash[:danger] = @room.errors.full_messages.join(', ') do |msg|
+        msg
+      end
+      redirect_to new_hotel_room_path
     end
-    redirect_to root_path
   end
 
   def edit

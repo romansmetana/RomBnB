@@ -21,7 +21,9 @@ class HotelsController < ApplicationController
       flash[:success] = 'Hotel was successfuly created'
       redirect_to root_path
     else
-      flash[:danger] = 'Something wrong..'
+      flash[:danger] = @hotel.errors.full_messages.join(', ') do |msg|
+        msg
+      end
       redirect_to new_hotel_path
     end
   end
@@ -34,10 +36,13 @@ class HotelsController < ApplicationController
     authorize @hotel
     if @hotel.update(hotel_params)
       flash[:success] = 'Hotel was successfuly updated'
+      redirect_to root_path
     else
-      flash[:danger] = 'Something wrong..'
+      flash[:danger] = @hotel.errors.full_messages.join(', ') do |msg|
+        msg
+      end
+      redirect_to edit_hotel_path
     end
-    redirect_to root_path
   end
 
   def destroy
