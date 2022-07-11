@@ -17,7 +17,7 @@ class HotelPolicy < ApplicationPolicy
     @user.owner?
   end
 
-  def destory?
+  def destroy?
     @user.owner?
   end
 
