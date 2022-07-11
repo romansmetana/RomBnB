@@ -16,12 +16,14 @@ class HotelsController < ApplicationController
 
   def create
     authorize Hotel
-    if current_user.hotels.create(hotel_params)
+    @hotel = current_user.hotels.create(hotel_params)
+    if @hotel.save
       flash[:success] = 'Hotel was successfuly created'
+      redirect_to root_path
     else
       flash[:danger] = 'Something wrong..'
+      redirect_to new_hotel_path
     end
-    redirect_to root_path
   end
 
   def edit
