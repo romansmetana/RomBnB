@@ -7,7 +7,7 @@ RSpec.describe HotelsController, type: :controller do
   end
   let(:hotel) { create(:hotel, user_id: user.id) }
   
-  describe 'GET /index' do
+  describe 'GET /new' do
     it 'returns http success' do
       get :new
       expect(response).to have_http_status(:success)
