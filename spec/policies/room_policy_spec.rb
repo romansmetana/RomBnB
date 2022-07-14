@@ -3,25 +3,35 @@ require 'rails_helper'
 RSpec.describe RoomPolicy, type: :policy do
   subject { described_class }
 
-  let(:user) { User.new }
-
-  permissions '.scope' do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  let(:user) { create(:user) }
 
   permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "User can't create room" do
+      expect(subject).not_to permit(user)  
+    end
+
+    it "Owner can create room" do
+      expect(subject).to permit(User.new(owner: true))  
+    end
   end
 
   permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "User can't update room" do
+      expect(subject).not_to permit(user)  
+    end
+
+    it "Owner can update room" do
+      expect(subject).to permit(User.new(owner: true))  
+    end
   end
 
   permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "User can't destroy room" do
+      expect(subject).not_to permit(user)  
+    end
+
+    it "Owner can destroy room" do
+      expect(subject).to permit(User.new(owner: true))  
+    end
   end
 end

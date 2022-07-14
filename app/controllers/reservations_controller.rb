@@ -21,6 +21,7 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    authorize Resrvation
     @reservation = Resrvation.find(params[:id])
     room_id = @reservation.room_id
     if @reservation.destroy
