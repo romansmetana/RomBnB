@@ -7,7 +7,7 @@ RSpec.describe RoomsController, type: :controller do
   end
   let(:hotel) { create(:hotel, user_id: user.id) }
   let(:room) { create(:room, hotel_id: hotel.id) }
-  
+
   describe 'GET /new' do
     it 'returns http success' do
       get :new, params: { hotel_id: hotel.id }
@@ -16,20 +16,28 @@ RSpec.describe RoomsController, type: :controller do
   end
 
   describe 'GET /create' do
+    let(:valid_params) do
+      { room: { name: 'For two person', price: '130.00', square: '50', capacity: '2', count: '5', double_bed: '1' },
+        hotel_id: hotel.id }
+    end
+    let(:invalid_params) do
+      { room: { name: '', price: '', square: '', capacity: '', count: '', double_bed: '' },
+        hotel_id: hotel.id }
+    end
     it 'created success' do
-      post :create, params: { :room => {:name => 'For two person', :price => '130.00', :square => '50', :capacity => '2', :count => '5', :double_bed => '1' }, :hotel_id => hotel.id }
-            expect(response).to have_http_status(302)git a
+      post :create, params: valid_params
+      expect(response).to have_http_status(302)
     end
 
     it 'creation failed' do
-      post :create, params: { :room => {:name => '', :price => '', :square => '', :capacity => '', :count => '', :double_bed => '' }, :hotel_id => hotel.id }
-            expect(response).to have_http_status(302)
+      post :create, params: invalid_params
+      expect(response).to have_http_status(302)
       expect(response).to redirect_to(new_hotel_room_path)
     end
   end
 
   describe 'GET /update' do
-    let(:params) { { room: { name: 'For married'}, hotel_id: hotel.id, id: room.id } }
+    let(:params) { { room: { name: 'For married' }, hotel_id: hotel.id, id: room.id } }
 
     it 'updated success' do
       put :update, params: params
@@ -40,10 +48,10 @@ RSpec.describe RoomsController, type: :controller do
     end
 
     context 'when update is fail' do
-      let(:params) { { room: { name: ''}, hotel_id: hotel.id, id: room.id } }
+      let(:invalid_params) { { room: { name: '' }, hotel_id: hotel.id, id: room.id } }
 
-       it 'updated success' do
-        put :update, params: params
+      it 'updated success' do
+        put :update, params: invalid_params
 
         room.reload
         expect(room.name).to eq(room.name)
@@ -59,5 +67,4 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(204)
     end
   end
-
 end

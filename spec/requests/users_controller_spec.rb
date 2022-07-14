@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'update success' do
       put :update, params: params
-      
+
       user.reload
       expect(user.first_name).to eq('Roman')
       expect(user.email).to eq('roman@new.com')

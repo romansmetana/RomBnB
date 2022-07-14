@@ -6,7 +6,7 @@ RSpec.describe HotelsController, type: :controller do
     sign_in(user)
   end
   let(:hotel) { create(:hotel, user_id: user.id) }
-  
+
   describe 'GET /new' do
     it 'returns http success' do
       get :new
@@ -29,21 +29,27 @@ RSpec.describe HotelsController, type: :controller do
   end
 
   describe 'GET /create' do
+    let(:valid_params) do
+      { hotel: { name: 'Prha Lviv', address: 'Levandivka', description: 'The best hotle in Lviv', city: 'Praha',
+                 user_id: user.id } }
+    end
+    let(:invalid_params) { { hotel: { name: '', address: '', description: '', city: '', user_id: user.id } } }
+
     it 'created success' do
-      post :create, params: {:hotel => {:name => 'Prha Lviv', :address => 'Levandivka', :description => 'The best hotle in Lviv', :city => 'Praha', :user_id => user.id}}
-            expect(response).to have_http_status(302)
+      post :create, params: valid_params
+      expect(response).to have_http_status(302)
       expect(response).to redirect_to(root_path)
     end
 
     it 'creation failed' do
-      post :create, params: {:hotel => {:name => '', :address => '', :description => '', :city => '', :user_id => user.id}}
-            expect(response).to have_http_status(302)
+      post :create, params: invalid_params
+      expect(response).to have_http_status(302)
       expect(response).to redirect_to(new_hotel_path)
     end
   end
 
   describe 'GET /update' do
-    let(:params) { { hotel: { name: 'Praha'}, id: hotel.id } }
+    let(:params) { { hotel: { name: 'Praha' }, id: hotel.id } }
 
     it 'updated success' do
       put :update, params: params
@@ -54,7 +60,7 @@ RSpec.describe HotelsController, type: :controller do
     end
 
     context 'when update is fail' do
-      let(:params) { { hotel: { name: ''}, id: hotel.id } }
+      let(:params) { { hotel: { name: '' }, id: hotel.id } }
 
       it 'update failed' do
         put :update, params: params
@@ -73,5 +79,4 @@ RSpec.describe HotelsController, type: :controller do
       expect(response).to have_http_status(204)
     end
   end
-
 end
