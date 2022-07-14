@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Rooms', type: :request do
+RSpec.describe ReservationsController, type: :controller do
   describe 'GET /index' do
     pending "add some examples (or delete) #{__FILE__}"
   end

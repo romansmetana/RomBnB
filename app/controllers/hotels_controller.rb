@@ -36,12 +36,12 @@ class HotelsController < ApplicationController
     authorize @hotel
     if @hotel.update(hotel_params)
       flash[:success] = 'Hotel was successfuly updated'
-      redirect_to root_path
+      redirect_to edit_hotel_path(@hotel)
     else
       flash[:danger] = @hotel.errors.full_messages.join(', ') do |msg|
         msg
       end
-      redirect_to edit_hotel_path
+      redirect_to edit_hotel_path(@hotel)
     end
   end
 
