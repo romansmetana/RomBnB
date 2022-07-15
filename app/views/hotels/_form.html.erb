@@ -1,0 +1,33 @@
+<%= form_with model: @hotel do |f| %>
+  <div class='container'>
+    <div class='d-flex justify-content-center gap-5'>
+      <div>
+        <div class="form-outline mb-4">
+          <%= f.label :name, class: 'form-label h5 d-block' %>
+          <%= f.text_field :name, autofocus: true, presence: true, class: "form-control" %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :address, class: 'form-label h5 d-block' %>
+          <%= f.text_field :address, autofocus: true, presence: true, class: "form-control" %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :description, class: 'form-label h5 d-block' %>
+          <%= f.text_area :description, autofocus: true, presence: true, rows: 3, class: "form-control"  %>
+        </div>
+      </div>
+      <div>
+        <div class="form-outline mb-4">
+          <%= f.label :city, class: 'form-label h5 d-block' %>
+          <%= f.text_field :city, autofocus: true, presence: true, class: "form-control" %>
+        </div>
+        <div class="form-outline mb-4">
+          <%= f.label :labels %>
+          <%= f.collection_select :label_ids, @labels, :id, :title , {}, multiple:  true %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Add", class: "btn btn-info btn-block mb-3 mt-3", style: 'width: 100px' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

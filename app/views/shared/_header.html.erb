@@ -3,12 +3,17 @@
     <div class="w-100 d-flex flex-wrap align-items-center justify-content-around">
       <div class="nav col-md-4  mb-2 justify-content-start mb-md-0 gap-3">
         <li><%= link_to 'Home', root_path, class: 'h4 text-color  text-decoration-none' %></li>
-        <li><%= link_to 'MyBooking', reservations_path, class: 'h4 text-color  text-decoration-none' %></li>
+        <% if @user.owner? %>
+          <li><%= link_to 'AllBookings', reservations_path, class: 'h4 text-color  text-decoration-none' %></li>
+        <% else %>
+          <li><%= link_to 'MyBooking', reservations_path, class: 'h4 text-color  text-decoration-none' %></li>
+        <% end %>
       </div>
       <div class="nav col-md-4 mb-2 justify-content-center mb-md-0 gap-3">
         <li><%= link_to 'RomBnB', root_path, class: 'display-6 fw-bold text-white text-decoration-none' %></li>
       </div>
-      <div class="col-md-4 own-drop dropdown d-flex justify-content-end">
+      <div class="col-md-4 own-drop dropdown d-flex align-items-center justify-content-end gap-3">
+        <h6 class='mb-0'><%= link_to 'Add hotel', new_hotel_path(@hotel), class: 'text-white link-secondary  text-decoration-none' if @user.owner? %></h6>
         <a class="own-drop-link tn dropdown-toggle text-white" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <div class='h5 d-inline text-white'><%= @user.first_name %> <%= @user.last_name %></div>
         </a>

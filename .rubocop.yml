@@ -10,7 +10,6 @@ AllCops:
     - 'tmp/**/*'
     - '.git/**/*'
     - 'bin/*'
-    - 'spec/*'
 
 Style/Documentation:
   Enabled: false  
@@ -18,5 +17,14 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-RSpec/MultipleExpectations:
+RSpec:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Lint/UselessAssignment:
   Enabled: false

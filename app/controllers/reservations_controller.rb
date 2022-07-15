@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   include ReservationsHelper
-   def index
-    @reservations = Resrvation.all
+  def index
+    @reservations = policy_scope(Resrvation).all
   end
 
   def create
@@ -9,6 +9,7 @@ class ReservationsController < ApplicationController
       flash[:warning] = 'You have already booked'
       redirect_to reservations_path
     else
+      authorize Resrvation
       @reservation = Resrvation.create(reserv_params)
       if @reservation.save
         session[:reservation_id] = @reservation.id
@@ -20,6 +21,7 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    authorize Resrvation
     @reservation = Resrvation.find(params[:id])
     room_id = @reservation.room_id
     if @reservation.destroy

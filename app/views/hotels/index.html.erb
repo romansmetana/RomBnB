@@ -1,10 +1,10 @@
-<h4 class='text-center text-secondary'><%= pluralize(@hotels_count, "hotel") %> found</h4>
+<h4 class='text-center text-secondary'><%= pluralize(@hotels.count, "hotel") %> found</h4>
 <% @hotels.each do |hotel| %>
   <div class='d-flex container mt-5 container-border p-4'>
-    <div class='me-2 col-sm-3 d-flex align-items-center'>
+    <div class='me-2 col-3 d-flex align-items-center'>
       <img src="https://fakeimg.pl/250x200/">
     </div>
-    <div class='text-dark d-flex align-items-start justify-content-between'>
+    <div class='col-9 text-dark d-flex justify-content-between'>
       <div>
         <div class='mb-auto p-2'>
           <h3><%=link_to hotel.name, hotel_path(hotel) %></h3>
@@ -20,8 +20,19 @@
       </div>
       <div>
         <p class='p-2'>Rooms:</p>
-        <% hotel.rooms.minmax.each do |room| %>
-          <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= number_to_currency(room.price) %></span></h5>
+        <% if hotel.rooms.empty? %>
+          <h4>Haven't any rooms</h4>
+        <% else %>
+          <% hotel.rooms.minmax{ |a, b| a.price <=> b.price }.each do |room| %>
+            <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= number_to_currency(room.price) %></span></h5>
+          <% end %>
+        <% end %>
+        <% if @user.owner? %>
+          <div class='d-flex gap-3'>
+            <p><%= link_to "Add room", new_hotel_room_path(hotel_id: hotel.id), class: 'btn btn-success btn-sm text-decoration-none text-white'%></p>
+            <p><%= link_to "Edit", edit_hotel_path(hotel), class: 'btn btn-warning btn-sm text-decoration-none text-white'%></p>
+            <p><%= link_to 'Delete', hotel_path(hotel), data: { "turbo-method": :delete }, class: 'btn btn-danger btn-sm' %></p>
+          </div>
         <% end %>
         <h4 class='btn btn-info' ><%= link_to "Show more", hotel_path(hotel), class: 'text-decoration-none text-white'%></h4>
       </div>

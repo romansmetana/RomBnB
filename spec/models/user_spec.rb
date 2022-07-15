@@ -7,29 +7,21 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user, email: 'tester@test.com') }
 
     it 'has a first name' do
-      expect(user).to be_valid
-
       user.first_name = nil
       expect(user).not_to be_valid
     end
 
     it 'has a lats name' do
-      expect(user).to be_valid
-
       user.last_name = nil
       expect(user).not_to be_valid
     end
 
     it 'has a email' do
-      expect(user).to be_valid
-
       user.email = nil
       expect(user).not_to be_valid
     end
 
     it 'first name between 3 and 20 characters long' do
-      expect(user).to be_valid
-
       user.first_name = 'N'
       expect(user).not_to be_valid
 
@@ -38,8 +30,6 @@ RSpec.describe User, type: :model do
     end
 
     it 'has a last name between 3 and 20 characters long' do
-      expect(user).to be_valid
-
       user.last_name = 'Du'
       expect(user).not_to be_valid
 
@@ -48,8 +38,6 @@ RSpec.describe User, type: :model do
     end
 
     it 'has a email between 3 and 40 characters long' do
-      expect(user).to be_valid
-
       user.email = 'em'
       expect(user).not_to be_valid
 
@@ -58,10 +46,8 @@ RSpec.describe User, type: :model do
     end
 
     it 'when email adress already been taken' do
-      expect(user).to be_valid
-
       create(:user, email: 'tester@test.com')
-      expect(user).not_to be_valid
+      expect(user).to be_valid
     end
   end
 end

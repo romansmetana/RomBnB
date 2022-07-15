@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_706_070_144) do
+ActiveRecord::Schema[7.0].define(version: 20_220_715_075_337) do
   create_table 'hotels', force: :cascade do |t|
     t.string 'name'
     t.string 'address'
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_706_070_144) do
     t.string 'city'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.integer 'user_id', null: false
   end
 
   create_table 'hotels_labels', id: false, force: :cascade do |t|
@@ -66,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_706_070_144) do
     t.datetime 'updated_at', null: false
     t.string 'first_name'
     t.string 'last_name'
+    t.boolean 'owner', default: false
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
