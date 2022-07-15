@@ -4,6 +4,7 @@ RSpec.describe RoomPolicy, type: :policy do
   subject { described_class }
 
   let(:user) { create(:user) }
+  let(:user_owner) { create(:user, email: 'owner@test.com', owner: true) }
 
   permissions :create? do
     it "User can't create room" do
@@ -11,7 +12,7 @@ RSpec.describe RoomPolicy, type: :policy do
     end
 
     it 'Owner can create room' do
-      expect(subject).to permit(User.new(owner: true))
+      expect(subject).to permit(user_owner)
     end
   end
 
@@ -21,7 +22,7 @@ RSpec.describe RoomPolicy, type: :policy do
     end
 
     it 'Owner can update room' do
-      expect(subject).to permit(User.new(owner: true))
+      expect(subject).to permit(user_owner)
     end
   end
 
@@ -31,7 +32,7 @@ RSpec.describe RoomPolicy, type: :policy do
     end
 
     it 'Owner can destroy room' do
-      expect(subject).to permit(User.new(owner: true))
+      expect(subject).to permit(user_owner)
     end
   end
 end

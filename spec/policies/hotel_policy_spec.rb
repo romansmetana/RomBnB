@@ -4,6 +4,7 @@ RSpec.describe HotelPolicy, type: :policy do
   subject { described_class }
 
   let(:user) { create(:user) }
+  let(:user_owner) { create(:user, email: 'owner@test.com', owner: true) }
 
   permissions :show? do
     it 'User can show hotel' do
@@ -11,7 +12,7 @@ RSpec.describe HotelPolicy, type: :policy do
     end
 
     it "Owner can't show hotel" do
-      expect(subject).not_to permit(User.new(owner: true))
+      expect(subject).not_to permit(user_owner)
     end
   end
 
@@ -21,7 +22,7 @@ RSpec.describe HotelPolicy, type: :policy do
     end
 
     it 'Owner can create hotel' do
-      expect(subject).to permit(User.new(owner: true))
+      expect(subject).to permit(user_owner)
     end
   end
 
@@ -31,7 +32,7 @@ RSpec.describe HotelPolicy, type: :policy do
     end
 
     it 'Owner can update hotel' do
-      expect(subject).to permit(User.new(owner: true))
+      expect(subject).to permit(user_owner)
     end
   end
 
@@ -41,7 +42,7 @@ RSpec.describe HotelPolicy, type: :policy do
     end
 
     it 'Owner can destroy hotel' do
-      expect(subject).to permit(User.new(owner: true))
+      expect(subject).to permit(user_owner)
     end
   end
 end

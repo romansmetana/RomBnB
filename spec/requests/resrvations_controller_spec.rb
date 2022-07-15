@@ -18,20 +18,18 @@ RSpec.describe ReservationsController, type: :controller do
   end
 
   describe 'GET /create' do
-    before do
-      session[:reservation_id] = reservation.id
-    end
+    before { session[:reservation_id] = reservation.id }
+
     it 'session - true' do
       post :create
       expect(response).to have_http_status(302)
       expect(response).to redirect_to(reservations_path)
     end
+
     context 'session - nil' do
-      before do
-        session[:reservation_id] = nil
-      end
+      before { session[:reservation_id] = nil }
       let(:params) { { user_id: user.id, room_id: room.id } }
-      it 'creation success' do
+      it 'creates success' do
         post :create, params: params
         expect(response).to have_http_status(302)
       end

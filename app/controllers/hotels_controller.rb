@@ -3,8 +3,7 @@ class HotelsController < ApplicationController
   before_action :set_labels, only: %i[new edit]
 
   def index
-    @hotels = policy_scope(Hotel).all
-    @hotels_count = policy_scope(Hotel).count
+    @hotels = policy_scope(Hotel)
   end
 
   def show; end
@@ -16,14 +15,12 @@ class HotelsController < ApplicationController
 
   def create
     authorize Hotel
-    @hotel = current_user.hotels.create(hotel_params)
+    @hotel = current_user.hotels.build(hotel_params)
     if @hotel.save
       flash[:success] = 'Hotel was successfuly created'
       redirect_to root_path
     else
-      flash[:danger] = @hotel.errors.full_messages.join(', ') do |msg|
-        msg
-      end
+      flash[:danger] = @hotel.errors.full_messages.join(', ')
       redirect_to new_hotel_path
     end
   end

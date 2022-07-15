@@ -13,9 +13,7 @@ class RoomsController < ApplicationController
       flash[:success] = 'Room was successfuly created'
       redirect_to root_path
     else
-      flash[:danger] = @room.errors.full_messages.join(', ') do |msg|
-        msg
-      end
+      flash[:danger] = @room.errors.full_messages.join(', ')
       redirect_to new_hotel_room_path
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_708_090_933) do
+ActiveRecord::Schema[7.0].define(version: 20_220_715_075_337) do
   create_table 'hotels', force: :cascade do |t|
     t.string 'name'
     t.string 'address'
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_708_090_933) do
     t.string 'city'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.integer 'user_id'
+    t.integer 'user_id', null: false
   end
 
   create_table 'hotels_labels', id: false, force: :cascade do |t|

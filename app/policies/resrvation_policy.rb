@@ -10,10 +10,10 @@ class ResrvationPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.owner? == false
+    !@user.owner?
   end
 
   def destroy?
-    @user.owner? || @user.owner? == false
+    @user.owner? || !@user.owner?
   end
 end

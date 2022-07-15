@@ -24,7 +24,7 @@ RSpec.describe RoomsController, type: :controller do
       { room: { name: '', price: '', square: '', capacity: '', count: '', double_bed: '' },
         hotel_id: hotel.id }
     end
-    it 'created success' do
+    it 'creates success' do
       post :create, params: valid_params
       expect(response).to have_http_status(302)
     end
@@ -42,8 +42,7 @@ RSpec.describe RoomsController, type: :controller do
     it 'updated success' do
       put :update, params: params
 
-      room.reload
-      expect(room.name).to eq('For married')
+      expect(room.reload.name).to eq('For married')
       expect(response).to redirect_to(root_path)
     end
 
@@ -53,8 +52,7 @@ RSpec.describe RoomsController, type: :controller do
       it 'updated success' do
         put :update, params: invalid_params
 
-        room.reload
-        expect(room.name).to eq(room.name)
+        expect(room.reload.name).to eq(room.name)
         expect(response).to redirect_to(root_path)
       end
     end

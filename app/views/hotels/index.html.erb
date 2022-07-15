@@ -1,4 +1,4 @@
-<h4 class='text-center text-secondary'><%= pluralize(@hotels_count, "hotel") %> found</h4>
+<h4 class='text-center text-secondary'><%= pluralize(@hotels.count, "hotel") %> found</h4>
 <% @hotels.each do |hotel| %>
   <div class='d-flex container mt-5 container-border p-4'>
     <div class='me-2 col-3 d-flex align-items-center'>
