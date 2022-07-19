@@ -1,4 +1,7 @@
 class Hotel < ApplicationRecord
+  mount_uploaders :images, ImageUploader
+  serialize :images, Array
+
   has_many :rooms, dependent: :destroy
   has_and_belongs_to_many :labels
   belongs_to :user

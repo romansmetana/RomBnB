@@ -1,4 +1,9 @@
 <h4 class='text-center mb-5'><%= @hotel.name %></h4>
+
+<% @hotel.images.each do |img| %>
+  <%= image_tag(img.url) %>
+<% end %>
+
 <% @hotel.rooms.each do |room| %>
   <div class="d-flex container-my container-border mb-5">
     <div class='me-2 col-4 d-flex align-items-center'>
