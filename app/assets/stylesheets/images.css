@@ -1,4 +1,9 @@
-.image_size{
+.image_size {
     max-height: 200px;
     max-width: 250px;
+}
+
+.image_size_edit {
+    max-height: 100px;
+    max-width: 150px;
 }

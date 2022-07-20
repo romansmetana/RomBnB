@@ -51,9 +51,6 @@ class HotelsController < ApplicationController
   end
 
   def add_images
-    
-    binding.pry
-    
     add_more_images(hotel_params[:images])
     flash[:error] = "Failed uploading images" unless @hotel.save
     redirect_to root_path
