@@ -17,6 +17,18 @@
         <%= f.email_field :email,presence: true, autofocus: true,placeholder: 'E-mail',
          autocomplete: "email", class: "form-control" %>
       </div>
+      <div class='d-flex align-items-center'>
+        <div class='col-6'>
+          <%= f.label 'Your Avatar', class: 'form-label h5' %>
+          <%= f.file_field :avatar, class: 'd-block' %>
+        </div>
+        <p class='col-6 d-flex justify-content-center'>
+          <label>
+            <%= f.check_box :remove_avatar %>
+            Remove avatar
+          </label>
+        </p>
+      </div>
       <div class="actions d-flex justify-content-center">
         <%= f.submit "Edit", class: "btn btn-primary btn-block mb-3 mt-3", style: 'width: 100px' %>
       </div>

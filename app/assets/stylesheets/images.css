@@ -7,3 +7,8 @@
     max-height: 100px;
     max-width: 150px;
 }
+
+.user_avatar_size{
+    height: 30px;
+    width: 30px;
+}
