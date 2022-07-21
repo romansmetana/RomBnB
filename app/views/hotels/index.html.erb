@@ -2,7 +2,8 @@
 <% @hotels.each do |hotel| %>
   <div class='d-flex container mt-5 container-border p-4'>
     <div class='me-4 col-3 d-flex align-items-center'>
-      <%= image_tag(hotel.images[0].url) %>
+      <%= image_tag(hotel.images[0].url) unless hotel.main_image? %>
+      <%= image_tag("#{hotel.main_image}") if hotel.main_image? %>
     </div>
     <div class='col-9 text-dark d-flex justify-content-between'>
       <div>

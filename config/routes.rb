@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :hotels do
     post 'add_images/:id', to: 'hotels#add_images', as: 'images'
     delete 'destroy_image/:id', to: 'hotels#destroy_img', as: 'image'
+    get 'main_image/:id', to: 'hotels#set_main_image', as: 'main_image'
     resources :rooms, only: %i[new create edit update destroy]
   end
   resources :reservations, only: %i[index new create destroy]

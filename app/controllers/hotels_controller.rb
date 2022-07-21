@@ -1,6 +1,6 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, except: %i[index new create destroy_img]
-  before_action :set_hotel_id, only: %i[add_images destroy_img]
+  before_action :set_hotel, except: %i[index new create destroy_img set_main_image]
+  before_action :set_hotel_id, only: %i[add_images destroy_img set_main_image]
   before_action :set_labels, only: %i[new edit]
   def index
     @hotels = policy_scope(Hotel)
@@ -59,6 +59,13 @@ class HotelsController < ApplicationController
   def destroy_img
     destroy_image_at_index(params[:id].to_i)
     flash[:error] = 'Failed deleting image' unless @hotel.save
+    redirect_to root_path
+  end
+
+  def set_main_image
+    index = params[:id].to_i
+    @hotel.main_image = @hotel.images[index].url
+    flash[:error] = 'Failed' unless @hotel.save
     redirect_to root_path
   end
 
