@@ -51,18 +51,21 @@ class HotelsController < ApplicationController
   end
 
   def add_images
+    authorize Hotel
     add_more_images(hotel_params[:images])
     flash[:error] = 'Failed uploading images' unless @hotel.save
     redirect_to root_path
   end
 
   def destroy_img
+    authorize Hotel
     destroy_image_at_index(params[:id].to_i)
     flash[:error] = 'Failed deleting image' unless @hotel.save
     redirect_to root_path
   end
 
   def set_main_image
+    authorize Hotel
     index = params[:id].to_i
     @hotel.main_image = @hotel.images[index].url
     flash[:error] = 'Failed' unless @hotel.save
