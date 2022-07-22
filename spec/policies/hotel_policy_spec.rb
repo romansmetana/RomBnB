@@ -45,4 +45,34 @@ RSpec.describe HotelPolicy, type: :policy do
       expect(subject).to permit(user_owner)
     end
   end
+
+  permissions :set_main_image? do
+    it "User can't set main image for hotel" do
+      expect(subject).not_to permit(user)
+    end
+
+    it 'Owner can set main image for hotel' do
+      expect(subject).to permit(user_owner)
+    end
+  end
+
+  permissions :add_images? do
+    it "User can't add images for hotel" do
+      expect(subject).not_to permit(user)
+    end
+
+    it 'Owner can add images for hotel' do
+      expect(subject).to permit(user_owner)
+    end
+  end
+
+  permissions :destroy_img? do
+    it "User can't destroy hotel's images" do
+      expect(subject).not_to permit(user)
+    end
+
+    it "Owner can hotel's images" do
+      expect(subject).to permit(user_owner)
+    end
+  end
 end
