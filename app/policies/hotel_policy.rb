@@ -24,7 +24,7 @@ class HotelPolicy < ApplicationPolicy
   def add_images?
     @user.owner?
   end
-  
+
   def destroy_img?
     @user.owner?
   end

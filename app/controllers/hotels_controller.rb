@@ -1,6 +1,5 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, except: %i[index new create destroy_img set_main_image]
-  before_action :set_hotel_id, only: %i[add_images destroy_img set_main_image]
+  before_action :set_hotel, except: %i[index new create]
   before_action :set_labels, only: %i[new edit]
   def index
     @hotels = policy_scope(Hotel)
@@ -83,11 +82,7 @@ class HotelsController < ApplicationController
   end
 
   def set_hotel
-    @hotel = Hotel.find(params[:id])
-  end
-
-  def set_hotel_id
-    @hotel = Hotel.find(params[:hotel_id])
+    @hotel = Hotel.find(params[:hotel_id] || params[:id])
   end
 
   def add_more_images(new_images)
