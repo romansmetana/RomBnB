@@ -1,9 +1,15 @@
 <h4 class='text-center mb-5'><%= @hotel.name %></h4>
+<h5 class='text-center'>Gallery</h5>
+<div class='d-flex flex-wrap w-100'>
+  <% @hotel.images.each do |img| %>
+    <div class='d-flex justify-content-end ms-3 me-1 shadow mb-5 bg-body rounded'>
+      <%= image_tag(img.url, class: 'image_size') %>
+    </div>
+  <% end %>
+</div>
+<h5 class='text-center'>Rooms</h5>
 <% @hotel.rooms.each do |room| %>
   <div class="d-flex container-my container-border mb-5">
-    <div class='me-2 col-4 d-flex align-items-center'>
-      <img src="https://fakeimg.pl/250x200/">
-    </div>
     <div class='col-4 border-end'>
       <h3 class='mb-auto me-3'><%= room.name  %></h3>
       <p>
@@ -31,7 +37,7 @@
       </div>
     <% else %>
       <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-green'>
-        <h6 class="verticaltext"><%= link_to 'Reservе', reservations_path(room_id: room.id, user_id: current_user.id), data: { "turbo-method": :post }, class: "text-decoration-none fs-5 fw-light text-primary link-dark" %></h6>
+        <h4><%= link_to 'Reservе', reservations_path(room_id: room.id, user_id: current_user.id), data: { "turbo-method": :post }, class: "text-decoration-none fs-5 fw-light text-primary link-dark" %></h4>
       </div>
     <% end %>
   </div>

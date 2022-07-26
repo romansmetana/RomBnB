@@ -1,8 +1,12 @@
 <h4 class='text-center text-secondary'><%= pluralize(@hotels.count, "hotel") %> found</h4>
 <% @hotels.each do |hotel| %>
   <div class='d-flex container mt-5 container-border p-4'>
-    <div class='me-2 col-3 d-flex align-items-center'>
-      <img src="https://fakeimg.pl/250x200/">
+    <div class='me-4 col-3 d-flex align-items-center'>
+      <% if hotel.main_image? %>
+        <%= image_tag("#{hotel.main_image}") %>
+      <% else %>
+        <%= image_tag(hotel.images[0].url) %>
+      <% end %>
     </div>
     <div class='col-9 text-dark d-flex justify-content-between'>
       <div>

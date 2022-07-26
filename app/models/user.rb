@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
   has_many :reservations, dependent: :destroy
   has_many :hotels, dependent: :destroy
   # Include default devise modules. Others available are:

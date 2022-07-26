@@ -1,1 +1,60 @@
-<%= render 'form' %>
+<div class='d-flex justify-content-between'>
+  <div class='w-50 ms-2 d-flex flex-column align-items-start justify-content-start'>
+    <h4 class='mb-3'>You can add or remove images:</h4>
+    <div class='d-flex flex-wrap w-100''>
+      <% @hotel.images.each_with_index do |img, index| %>
+        <div class='d-flex justify-content-end ms-3 me-1 shadow mb-5 bg-body rounded'>
+          <%= image_tag(img.url, class: 'd-block image_size_edit') %>
+          <div class='position-absolute'>
+            <%= link_to '<i class="fa-solid fa-check"></i>'.html_safe, hotel_main_image_path(@hotel, index), data: { "turbo-method": :get }, class: 'p-1 text-warning' %>
+            <%= link_to '<i class="fa-solid fa-x"></i>'.html_safe, hotel_image_path(@hotel, index), data: { "turbo-method": :delete }, class: 'p-1 text-danger' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= form_for @hotel, url: hotel_add_images_path(@hotel), method: :post do |f| %>
+      <div class='field'>
+        <%= f.file_field :images, multiple: true %>
+      </div>
+      <div class='actions'>
+        <%= f.submit "Add More Images" %>
+      </div>
+    <% end %>
+  </div>
+  <div class='w-50 '>
+    <h4 class='mb-3'>You can update your hotel:</h4>
+    <%= form_with model: @hotel do |f| %>
+      <div class='container'>
+        <div class='d-flex justify-content-center gap-5'>
+          <div>
+            <div class="form-outline mb-4">
+              <%= f.label :name, class: 'form-label h5 d-block' %>
+              <%= f.text_field :name, autofocus: true, presence: true, class: "form-control" %>
+            </div>
+            <div class="form-outline mb-4">
+              <%= f.label :address, class: 'form-label h5 d-block' %>
+              <%= f.text_field :address, autofocus: true, presence: true, class: "form-control" %>
+            </div>
+            <div class="form-outline mb-4">
+              <%= f.label :description, class: 'form-label h5 d-block' %>
+              <%= f.text_area :description, autofocus: true, presence: true, rows: 3, class: "form-control"  %>
+            </div>
+          </div>
+          <div>
+            <div class="form-outline mb-4">
+              <%= f.label :city, class: 'form-label h5 d-block' %>
+              <%= f.text_field :city, autofocus: true, presence: true, class: "form-control" %>
+            </div>
+            <div class="form-outline mb-4">
+              <%= f.label :labels %>
+              <%= f.collection_select :label_ids, @labels, :id, :title , {}, multiple:  true %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Update", class: "btn btn-info btn-block mb-3 mt-3", style: 'width: 100px' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,7 +1,6 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: %i[show edit update destroy]
+  before_action :set_hotel, except: %i[index new create]
   before_action :set_labels, only: %i[new edit]
-
   def index
     @hotels = policy_scope(Hotel)
   end
@@ -50,10 +49,31 @@ class HotelsController < ApplicationController
     end
   end
 
+  def add_images
+    authorize Hotel
+    add_more_images(hotel_params[:images])
+    flash[:error] = 'Failed uploading images' unless @hotel.save
+    redirect_to root_path
+  end
+
+  def destroy_img
+    authorize Hotel
+    destroy_image_at_index(params[:id].to_i)
+    flash[:error] = 'Failed deleting image' unless @hotel.save
+    redirect_to root_path
+  end
+
+  def set_main_image
+    authorize Hotel
+    index = params[:id].to_i
+    flash[:error] = 'Failed' unless @hotel.update(main_image: @hotel.images[index].url)
+    redirect_to root_path
+  end
+
   private
 
   def hotel_params
-    params.require(:hotel).permit(:name, :address, :description, :city, label_ids: [])
+    params.require(:hotel).permit(:name, :address, :description, :city, { label_ids: [] }, { images: [] })
   end
 
   def set_labels
@@ -61,6 +81,23 @@ class HotelsController < ApplicationController
   end
 
   def set_hotel
-    @hotel = Hotel.find(params[:id])
+    @hotel = Hotel.find(params[:hotel_id] || params[:id])
+  end
+
+  def add_more_images(new_images)
+    images = @hotel.images
+    images += new_images
+    @hotel.images = images
+  end
+
+  def destroy_image_at_index(index)
+    hotel_images = @hotel.images
+    if index == 0 && @hotel.images.size == 1
+      @hotel.remove_images!
+    else
+      deleted_image = hotel_images.delete_at(index)
+      deleted_image.try(:remove!)
+      @hotel.images = hotel_images
+    end
   end
 end

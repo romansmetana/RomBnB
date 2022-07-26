@@ -6,33 +6,25 @@ RSpec.describe RoomPolicy, type: :policy do
   let(:user) { create(:user) }
   let(:user_owner) { create(:user, email: 'owner@test.com', owner: true) }
 
-  permissions :create? do
-    it "User can't create room" do
+  shared_examples "User owner/user can/can't to do" do
+    it "User can't to do" do
       expect(subject).not_to permit(user)
     end
 
-    it 'Owner can create room' do
+    it 'Owner can to do' do
       expect(subject).to permit(user_owner)
     end
+  end
+
+  permissions :create? do
+    include_examples "User owner/user can/can't to do"
   end
 
   permissions :update? do
-    it "User can't update room" do
-      expect(subject).not_to permit(user)
-    end
-
-    it 'Owner can update room' do
-      expect(subject).to permit(user_owner)
-    end
+    include_examples "User owner/user can/can't to do"
   end
 
   permissions :destroy? do
-    it "User can't destroy room" do
-      expect(subject).not_to permit(user)
-    end
-
-    it 'Owner can destroy room' do
-      expect(subject).to permit(user_owner)
-    end
+    include_examples "User owner/user can/can't to do"
   end
 end

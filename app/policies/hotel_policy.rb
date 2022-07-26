@@ -20,4 +20,16 @@ class HotelPolicy < ApplicationPolicy
   def destroy?
     @user.owner?
   end
+
+  def add_images?
+    @user.owner?
+  end
+
+  def destroy_img?
+    @user.owner?
+  end
+
+  def set_main_image?
+    @user.owner?
+  end
 end

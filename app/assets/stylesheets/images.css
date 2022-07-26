@@ -1,0 +1,14 @@
+.image_size {
+    max-height: 200px;
+    max-width: 250px;
+}
+
+.image_size_edit {
+    max-height: 100px;
+    max-width: 150px;
+}
+
+.user_avatar_size{
+    height: 30px;
+    width: 30px;
+}
