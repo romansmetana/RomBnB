@@ -66,8 +66,7 @@ class HotelsController < ApplicationController
   def set_main_image
     authorize Hotel
     index = params[:id].to_i
-    @hotel.main_image = @hotel.images[index].url
-    flash[:error] = 'Failed' unless @hotel.save
+    flash[:error] = 'Failed' unless @hotel.update(main_image: @hotel.images[index].url)
     redirect_to root_path
   end
 
