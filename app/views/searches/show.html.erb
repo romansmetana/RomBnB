@@ -1,0 +1,16 @@
+<h1>Searching Result</h1>
+<% if @search.search_hotels.empty? %>
+  <p>Results Not Found</p>
+<% else %>
+  <% if @search.min_price? || @search.max_price? || @search.capacity? %>
+    <% @search.search_hotels.each do |s|%>
+      <h3><%= s.hotel.name %></h3>
+      <p><%= s.hotel.description %></p>
+    <% end %>
+  <% else %>
+    <% @search.search_hotels.each do |s|%>
+      <h3><%= s.name %></h3>
+      <p><%= s.description %></p>
+    <% end %>
+  <% end %>
+<% end %>
