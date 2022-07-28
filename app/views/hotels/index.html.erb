@@ -1,4 +1,8 @@
 <h4 class='text-center text-secondary'><%= pluralize(@hotels.count, "hotel") %> found</h4>
+ <%= form_tag hotels_path, method: :get do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag 'Search' %>
+ <% end %>
 <% @hotels.each do |hotel| %>
   <div class='d-flex container mt-5 container-border p-4'>
     <div class='me-4 col-3 d-flex align-items-center'>
