@@ -6,4 +6,15 @@ module ApplicationHelper
       raw file.read
     end
   end
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    if params[:direction] == "ASC"
+      direction = "DESC"
+    else
+      direction = "ASC"
+    end
+    link_to title, sort: column, direction: direction
+  end
+  
 end
