@@ -16,7 +16,6 @@ RSpec.describe HotelPolicy, type: :policy do
     end
   end
 
-  
   permissions :create? do
     include_examples "User owner/user can/can't to do"
   end
@@ -24,7 +23,7 @@ RSpec.describe HotelPolicy, type: :policy do
   permissions :update? do
     include_examples "User owner/user can/can't to do"
   end
-  
+
   permissions :destroy? do
     include_examples "User owner/user can/can't to do"
   end
@@ -40,12 +39,12 @@ RSpec.describe HotelPolicy, type: :policy do
   permissions :destroy_img? do
     include_examples "User owner/user can/can't to do"
   end
-  
+
   permissions :show? do
     it 'User can show hotel' do
       expect(subject).not_to permit(user)
     end
-  
+
     it "Owner can't show hotel" do
       expect(subject).not_to permit(user_owner)
     end

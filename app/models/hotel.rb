@@ -10,12 +10,4 @@ class Hotel < ApplicationRecord
   validates :address, presence: true, length: { minimum: 3, maximum: 50 }
   validates :description, presence: true, length: { minimum: 3, maximum: 300 }
   validates :city, presence: true, length: { minimum: 2, maximum: 30 }
-
-  def self.search(search)
-    if search
-      where("name LIKE ?","%#{search}%")
-    else
-      all
-    end
-  end
 end

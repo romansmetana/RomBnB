@@ -33,9 +33,7 @@ class HotelsController < ApplicationController
     if @hotel.update(hotel_params)
       flash[:success] = 'Hotel was successfuly updated'
     else
-      flash[:danger] = @hotel.errors.full_messages.join(', ') do |msg|
-        msg
-      end
+      flash[:danger] = @hotel.errors.full_messages.join(', ')
     end
     redirect_to edit_hotel_path(@hotel)
   end
@@ -92,7 +90,7 @@ class HotelsController < ApplicationController
 
   def destroy_image_at_index(index)
     hotel_images = @hotel.images
-    if index == 0 && @hotel.images.size == 1
+    if index.zero? && @hotel.images.size == 1
       @hotel.remove_images!
     else
       deleted_image = hotel_images.delete_at(index)
@@ -102,11 +100,10 @@ class HotelsController < ApplicationController
   end
 
   def sort_column
-    Hotel.column_names.include?(params[:sort] ? params[:sort] : "name")
+    Hotel.column_names.include?(params[:sort] || 'name')
   end
 
   def sort_direction
-    %w[ask desk].include?(params[:direction] ? params[:direction] : "ask")
+    %w[ask desk].include?(params[:direction] || 'ask')
   end
-  
 end
