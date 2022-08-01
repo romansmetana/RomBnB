@@ -2,7 +2,7 @@ class HotelsController < ApplicationController
   before_action :set_hotel, except: %i[index new create]
   before_action :set_labels, only: %i[new edit]
   def index
-    @hotels = policy_scope(Hotel.order("#{params[:sort]} #{params[:direction]}"))
+    @hotels = policy_scope(Hotel.includes(:rooms).order("#{params[:sort]} #{params[:direction]}").references(:rooms))
   end
 
   def show; end
