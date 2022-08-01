@@ -44,10 +44,5 @@ RSpec.describe User, type: :model do
       user.email = 'tester@test.com' * 10
       expect(user).not_to be_valid, 'More than 40 characters'
     end
-
-    it 'when email adress already been taken' do
-      create(:user, email: 'tester@test.com')
-      expect(user).to be_valid
-    end
   end
 end

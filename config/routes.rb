@@ -2,12 +2,13 @@
 
 Rails.application.routes.draw do
   devise_for :users
+  resources :searches, only: %i[new create show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :users, only: %i[index edit update]
   resources :hotels do
     post 'add_images'
     delete 'destroy_image/:id', to: 'hotels#destroy_img', as: 'image'
-    match 'main_image/:id', to: 'hotels#set_main_image', as: 'main_image', via: [:get, :match]
+    match 'main_image/:id', to: 'hotels#set_main_image', as: 'main_image', via: %i[get match]
     resources :rooms, only: %i[new create edit update destroy]
   end
   resources :reservations, only: %i[index new create destroy]

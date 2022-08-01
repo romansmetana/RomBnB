@@ -1,0 +1,35 @@
+<div class='d-flex container mt-5 container-border p-4'>
+  <div class='me-4 col-3 d-flex align-items-center'>
+    <% if s.main_image? %>
+      <%= image_tag("#{s.main_image}") %>
+    <% else %>
+      <%= image_tag(s.images[0].url) %>
+    <% end %>
+  </div>
+  <div class='col-9 text-dark d-flex justify-content-between'>
+    <div>
+      <div class='mb-auto p-2'>
+        <h3><%=link_to s.name, s %></h3>
+        <p class='font-weight-light text-wrap w-75'><%= s.description %></p>
+      </div>
+      <div class="p-2 text-secondary">
+        <h6><%= s.address %></h6>
+        <h6><%= s.city %></h6>
+      </div>
+      <div class='d-flex flex-wrap w-75'>
+        <%= render s.labels %>
+      </div>
+    </div>
+    <div>
+      <p class='p-2'>Rooms:</p>
+      <% if s.rooms.empty? %>
+        <h4>Haven't any rooms</h4>
+      <% else %>
+        <% s.rooms.minmax{ |a, b| a.price <=> b.price }.each do |room| %>
+          <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= number_to_currency(room.price) %></span></h5>
+        <% end %>
+      <% end %>
+      <h4 class='btn btn-info' ><%= link_to "Show more", s, class: 'text-decoration-none text-white'%></h4>
+    </div>
+  </div>
+</div>

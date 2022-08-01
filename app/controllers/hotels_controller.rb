@@ -2,7 +2,7 @@ class HotelsController < ApplicationController
   before_action :set_hotel, except: %i[index new create]
   before_action :set_labels, only: %i[new edit]
   def index
-    @hotels = policy_scope(Hotel)
+    @pagy, @hotels = pagy(policy_scope(Hotel.includes(:rooms).order("#{params[:sort]} #{params[:direction]}").references(:rooms)))
   end
 
   def show; end
@@ -33,9 +33,7 @@ class HotelsController < ApplicationController
     if @hotel.update(hotel_params)
       flash[:success] = 'Hotel was successfuly updated'
     else
-      flash[:danger] = @hotel.errors.full_messages.join(', ') do |msg|
-        msg
-      end
+      flash[:danger] = @hotel.errors.full_messages.join(', ')
     end
     redirect_to edit_hotel_path(@hotel)
   end
@@ -92,12 +90,20 @@ class HotelsController < ApplicationController
 
   def destroy_image_at_index(index)
     hotel_images = @hotel.images
-    if index == 0 && @hotel.images.size == 1
+    if index.zero? && @hotel.images.size == 1
       @hotel.remove_images!
     else
       deleted_image = hotel_images.delete_at(index)
       deleted_image.try(:remove!)
       @hotel.images = hotel_images
     end
+  end
+
+  def sort_column
+    Hotel.column_names.include?(params[:sort] || 'name')
+  end
+
+  def sort_direction
+    %w[ask desk].include?(params[:direction] || 'ask')
   end
 end
