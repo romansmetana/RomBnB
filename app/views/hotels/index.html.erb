@@ -2,7 +2,6 @@
 
 <%= link_to "Search hotels", new_search_path %>
 <p>Sort | <%= sortable "price" %></p>
-<%== pagy_nav(@pagy) %>
 <% @hotels.each do |hotel| %>
   <div class='d-flex container mt-5 container-border p-4'>
     <div class='me-4 col-3 d-flex align-items-center'>
@@ -47,3 +46,4 @@
     </div>
   </div>
 <% end %>
+<h5 class='d-flex justify-content-center'><%== pagy_nav(@pagy) %></h5>

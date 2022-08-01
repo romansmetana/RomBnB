@@ -3,14 +3,12 @@
   <p>Results Not Found</p>
 <% else %>
   <% if @search.min_price? || @search.max_price? || @search.capacity? %>
-    <% @search.search_hotels.each do |s|%>
-      <h3><%= link_to "#{s.hotel.name}", hotel_path(s.hotel) %></h3>
-      <p><%= s.hotel.description %></p>
+    <% @search.search_hotels.each do |search|%>
+      <%= render 'room_hotel', s: search %>
     <% end %>
   <% else %>
-    <% @search.search_hotels.each do |s|%>
-      <h3><%= link_to "#{s.name}", s %></h3>
-      <p><%= s.description %></p>
+    <% @search.search_hotels.each do |search|%>
+      <%= render 'hotel', s: search  %>
     <% end %>
   <% end %>
 <% end %>
