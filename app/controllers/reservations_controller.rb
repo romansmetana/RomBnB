@@ -32,7 +32,7 @@ class ReservationsController < ApplicationController
       session[:reservation_id] = nil
       rooms_count(room_id)
       redirect_to root_path
-      flash[:danger] = 'You have canceled your reservation'
+      flash[:danger] = 'You have deleted your reservation'
     end
   end
 

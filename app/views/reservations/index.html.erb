@@ -35,9 +35,10 @@
           <h5 class='text-secondary'>Count</h5>
           <h5><%= r.room.count %></h5>
         </div>
+        
         <div class='ms-1 col d-flex align-items-center justify-content-center flex-column custom-bg-danger'>
-          <h6><%= link_to 'Cancel', reservation_path(r),data: { "turbo-method": :delete }, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
-          <h6><%= link_to 'Your review', new_review_path, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
+          <h6><%= link_to 'Delete', reservation_path(r),data: { "turbo-method": :delete }, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
+          <h6><%= link_to 'Your review', new_review_path, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" if r.status == "active"%></h6>
         </div>
       </div>
     </div>
