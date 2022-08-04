@@ -1,5 +1,5 @@
 module ReservationsHelper
-  def room_count(room_id)
+  def rooms_count(room_id)
     current_room = Room.find_by(id: room_id)
 
     if session[:reservation_id]

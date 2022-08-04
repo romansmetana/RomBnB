@@ -1,7 +1,11 @@
 class ReservationsController < ApplicationController
   include ReservationsHelper
   def index
-    @reservations = policy_scope(Resrvation).all
+    @reservations = if params[:status] == "active"
+                      policy_scope(Resrvation.active)
+                    else
+                      policy_scope(Resrvation.archived)
+                    end
   end
 
   def create
@@ -13,7 +17,7 @@ class ReservationsController < ApplicationController
       @reservation = Resrvation.create(reserv_params)
       if @reservation.save
         session[:reservation_id] = @reservation.id
-        room_count(@reservation.room_id)
+        rooms_count(@reservation.room_id)
         redirect_to root_path
         flash[:success] = 'Your reservation was created'
       end
@@ -26,7 +30,7 @@ class ReservationsController < ApplicationController
     room_id = @reservation.room_id
     if @reservation.destroy
       session[:reservation_id] = nil
-      room_count(room_id)
+      rooms_count(room_id)
       redirect_to root_path
       flash[:danger] = 'You have canceled your reservation'
     end

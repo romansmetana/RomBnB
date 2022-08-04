@@ -1,7 +1,8 @@
+<h6 class='text-center'><%= link_to 'Archived Booking', "#{reservations_path}?status=archived", class: 'text-decoration-none' %></h6>
 <% if @reservations.empty? %>
   <h3 class='alert alert-warning text-center'>You don't have any reservations</h3>
   <% unless @user.owner? %>
-    <h6 class='text-center text-secondary'>To book a room: <%= link_to "booking", root_path, class: 'text-decoration-none' %></h6>
+    <h6 class='text-center text-secondary'>Book a room: <%= link_to "booking", root_path, class: 'text-decoration-none' %></h6>
   <% end %>
 <% else %>
   <div class='container'>
@@ -34,8 +35,9 @@
           <h5 class='text-secondary'>Count</h5>
           <h5><%= r.room.count %></h5>
         </div>
-        <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-danger'>
+        <div class='ms-1 col d-flex align-items-center justify-content-center flex-column custom-bg-danger'>
           <h6><%= link_to 'Cancel', reservation_path(r),data: { "turbo-method": :delete }, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
+          <h6><%= link_to 'Your review', new_review_path, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
         </div>
       </div>
     </div>
