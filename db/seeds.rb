@@ -14,11 +14,10 @@ tag4 = Label.create(title: 'Gym', icon: 'fa-solid fa-dumbbell')
 tag5 = Label.create(title: 'Pets', icon: 'fa-solid fa-paw')
 
 Hotel.delete_all
-
 hotel = Hotel.create(name: 'Hilton',
                      description: 'Cozy rooms in a modern hotel with a rooftop restaurant and lounge, as well as an indoor pool and spa.', 
                      address: 'Pobřežní 311/1', 
-                     city: 'Praha', 
+                     city: 'Praha',
                      user_id: 1)
 room = Room.create(name: 'For two person',
                    price: 130,
