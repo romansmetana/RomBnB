@@ -1,7 +1,7 @@
 class Room < ApplicationRecord
   belongs_to :hotel, optional: true
   has_many :resrvations, dependent: :destroy
-
+  has_many :reviews, dependent: :destroy
   validates :name, presence: true, length: { minimum: 1 }
   validates :price, presence: true, length: { minimum: 1 }
   validates :square, presence: true, length: { minimum: 1 }
