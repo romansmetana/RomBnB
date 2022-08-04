@@ -27,12 +27,17 @@ class ReservationsController < ApplicationController
   def destroy
     authorize Resrvation
     @reservation = Resrvation.find(params[:id])
-    room_id = @reservation.room_id
-    if @reservation.destroy
-      session[:reservation_id] = nil
-      rooms_count(room_id)
+    if @reservation.status == "active"
+      room_id = @reservation.room_id
+      if @reservation.destroy
+        session[:reservation_id] = nil
+        rooms_count(room_id)
+        redirect_to root_path
+        flash[:danger] = 'You have deleted your reservation'
+      end
+    else
+      flash[:warning] = "You can't to delete this reservation"
       redirect_to root_path
-      flash[:danger] = 'You have deleted your reservation'
     end
   end
 
