@@ -38,11 +38,11 @@
       </div>
     <% else %>
       <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-green'>
-      <% if room.count >= 1 %>
-        <h4><%= link_to 'Reservе', reservations_path(room_id: room.id, user_id: current_user.id), data: { "turbo-method": :post }, class: "text-decoration-none fs-5 fw-light text-primary link-dark" %></h4>
+        <% if room.count >= 1 %>
+          <h4><%= link_to 'Reservе', reservations_path(room_id: room.id, user_id: current_user.id), data: { "turbo-method": :post }, class: "text-decoration-none fs-5 fw-light text-primary link-dark" %></h4>
         <% else %>
-        <h4>All rooms are reserved</h4>
-      <% end %>
+          <h4>All rooms are reserved</h4>
+        <% end %>
       </div>
     <% end %>
   </div>
@@ -60,12 +60,16 @@
   <section class="section-primary t-bordered">
     <div class="container">
       <div class='d-flex gap-5 justify-content-start flex-wrap'>
-        <% room.reviews.each do |r| %>
-          <div>
-            <h6><%= r.comment %></h6>
-            <p class='text-muted'>Rating: <%= r.rating %> </p>
-            <p class='text-muted'><%= r.user.first_name %> <%= r.user.last_name %></p>
-          </div>
+        <% if room.reviews.empty?  %>
+          <h4 class='text-center'>Reviews not found</h4>
+        <% else %>
+          <% room.reviews.each do |r| %>
+            <div>
+              <h6><%= r.comment %></h6>
+              <p class='text-muted'>Rating: <%= r.rating %> </p>
+              <p class='text-muted'><%= r.user.first_name %> <%= r.user.last_name %></p>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
