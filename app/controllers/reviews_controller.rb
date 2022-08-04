@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
           flash[:success] = "Review successfully created"
           redirect_to root_path
         else
-          flash[:error] = "Something went wrong"
+          flash[:danger] = @review.errors.full_messages.join(', ')
           render 'new'
         end
     end
