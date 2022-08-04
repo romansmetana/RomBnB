@@ -1,4 +1,4 @@
-<h6 class='text-center'><%= link_to 'Archived Booking', "#{reservations_path}?status=archived", class: 'text-decoration-none' %></h6>
+<h6 class='text-center'><%= link_to 'Archived Booking', "#{reservations_path}?status=archived", class: 'text-decoration-none' unless params[:status] == "archived" %></h6>
 <% if @reservations.empty? %>
   <h3 class='alert alert-warning text-center'>You don't have any reservations</h3>
   <% unless @user.owner? %>
@@ -44,7 +44,7 @@
             </div>
           <% else %>
             <div class='ms-1 col d-flex align-items-center justify-content-center flex-column'>
-              <h5><%= link_to 'Book again', hotel_path(r.room.hotel) %></h5>
+              <h5><%= link_to 'Book again', hotel_path(r.room.hotel) unless @user.owner? %></h5>
             </div>
           <% end %>
         </div>

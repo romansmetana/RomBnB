@@ -4,7 +4,7 @@
       <div class="nav col-md-4  mb-2 justify-content-start mb-md-0 gap-3">
         <li><%= link_to 'Home', root_path, class: 'h4 text-color  text-decoration-none' %></li>
         <% if @user.owner? %>
-          <li><%= link_to 'AllBookings', reservations_path, class: 'h4 text-color  text-decoration-none' %></li>
+          <li><%= link_to 'AllBookings', "#{reservations_path}?status=active", class: 'h4 text-color  text-decoration-none' %></li>
         <% else %>
           <li><%= link_to 'MyBooking', "#{reservations_path}?status=active", class: 'h4 text-color  text-decoration-none' %></li>
         <% end %>
