@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :rooms, only: %i[new create edit update destroy]
   end
   resources :reservations, only: %i[index new create destroy]
+  resources :reviews, only: %i[new create destroy]
   # Defines the root path route ("/")
   root to: 'hotels#index'
 end
