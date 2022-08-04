@@ -5,7 +5,9 @@ class ReviewsController < ApplicationController
     def new
         @review = Review.new
     end
+
     def create
+        authorize Review
         @review = current_user.reviews.new(review_params)
         if @review.save
           change_reservation_status
