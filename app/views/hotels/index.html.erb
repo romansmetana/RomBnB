@@ -26,12 +26,13 @@
         </div>
       </div>
       <div>
+      <h4>Rating: <%= Review.where(room_id: hotel.rooms.map{|room| room.id}).average(:rating).to_i %></h4>
         <p class='p-2'>Rooms:</p>
         <% if hotel.rooms.empty? %>
           <h4>Haven't any rooms</h4>
         <% else %>
           <% hotel.rooms.minmax{ |a, b| a.price <=> b.price }.each do |room| %>
-            <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark'><%= number_to_currency(room.price) %></span></h5>
+            <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark fw-light'><%= number_to_currency(room.price) %></span></h5>
           <% end %>
         <% end %>
         <% if @user.owner? %>
