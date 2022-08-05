@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   include ReservationsHelper
   def index
-    @reservations = if params[:status] == "active"
+    @reservations = if params[:status] == 'active'
                       policy_scope(Resrvation.active)
                     else
                       policy_scope(Resrvation.archived)
@@ -27,7 +27,7 @@ class ReservationsController < ApplicationController
   def destroy
     authorize Resrvation
     @reservation = Resrvation.find(params[:id])
-    if @reservation.status == "active"
+    if @reservation.status == 'active'
       room_id = @reservation.room_id
       if @reservation.destroy
         session[:reservation_id] = nil
