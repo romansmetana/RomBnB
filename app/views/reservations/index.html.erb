@@ -12,7 +12,7 @@
         <h6 class='text-secondary'>Last name: <span class='text-dark h5'><%= r.user.last_name %></span></h6>
         <h6 class='text-secondary'>E-mail: <span class='text-dark fw-light'> <%= r.user.email %></span></h6>
       </div>
-      <div>
+      <div class='border-bottom mb-3'>
         <h5 class='text-center'><%= r.room.hotel.name %></h5>
         <div class="d-flex container-my container-border mb-5">
           <div class='col-4 border-end'>
@@ -38,8 +38,8 @@
             <% end %>
           </div>
           <% if r.status == "active" %>
-            <div class='ms-1 col d-flex align-items-center justify-content-center flex-column custom-bg-danger'>
-              <h6><%= link_to 'Delete', reservation_path(r),data: { "turbo-method": :delete }, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
+            <div class='ms-1 col d-flex align-items-center justify-content-center flex-column custom-bg-warning'>
+              <h6><%= link_to 'Cancel', reservation_path(r),data: { "turbo-method": :delete }, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
               <h6><%= link_to 'Your review', new_review_path, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
             </div>
           <% else %>
