@@ -8,70 +8,85 @@
     <% end %>
   </div>
 </div>
-<h5 class='text-center'>Rooms</h5>
+<div class="container-xxl bg-white p-0">
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title text-center text-primary text-uppercase">Our Rooms</h6>
+        <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Rooms</span></h1>
+      </div>
+      <div class="row g-4">
+        <% @hotel.rooms.each do |room| %>
+          <div class="col-lg-4 col-md-6">
+            <div class="room-item shadow rounded overflow-hidden">
+              <div class="p-4 mt-2">
+                <div class="d-flex justify-content-between mb-3">
+                  <h5 class="mb-0"><%= room.name %></h5>
+                  <div class="ps-2">
+                    <small class="fa fa-star text-warning"></small>
+                    <small class="fa fa-star text-warning"></small>
+                    <small class="fa fa-star text-warning"></small>
+                    <small class="fa fa-star text-warning"></small>
+                    <small class="fa fa-star text-warning"></small>
+                  </div>
+                </div>
+                <div class="d-flex mb-3">
+                  <small class="border-end me-3 pe-3">
+                    <% if room.single_bed %>
+                      <small class='me-2'><i class="fa-solid fa-bed text-primary"></i> x <%= room.single_bed %></small>
+                    <% end %>
+                    <% if room.double_bed %>
+                      <small><%= show_svg('double-bed.svg') %> x <%= room.double_bed %></small>
+                    <% end %>
+                  </small>
+                  <small class="border-end me-3 pe-3"><i class="fa-solid fa-house text-primary me-2"></i> <%= room.square %> m²</small>
+                  <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <% if @user.owner? %>
+                    <%= link_to 'Edit',  edit_hotel_room_path(@hotel, room), class: "btn btn-sm btn-dark rounded py-2 px-4 me-2" %>
+                    <%= link_to '<i class="fa-solid fa-trash-can"></i>'.html_safe, hotel_room_path(@hotel, room), data: { "turbo-method": :delete }, class: 'btn btn-sm btn-danger rounded py-2 px-4' %>
+                  <% else %>
+                    <% if room.count >= 1 %>
+                      <%= link_to 'Book Now', reservations_path(room_id: room.id, user_id: current_user.id), data: { "turbo-method": :post }, class: "btn btn-sm btn-dark rounded py-2 px-4" %>
+                      <small class="bg-primary text-white rounded py-1 px-3 ms-4"><%= number_to_currency(room.price) %>/Night</small>
+                    <% else %>
+                      <h4>All rooms are reserved</h4>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 <% @hotel.rooms.each do |room| %>
-  <div class="d-flex container-my container-border mb-5">
-    <div class='col-4 border-end'>
-      <h3 class='mb-auto me-3'><%= room.name  %></h3>
-      <p>
-        <% if room.single_bed %>
-          <p><i class="fa-solid fa-bed"></i> x <%= room.single_bed %></p>
-        <% end %>
-      </p>
-      <p>
-        <% if room.double_bed %>
-          <p><%= show_svg('double-bed.svg') %> x <%= room.double_bed %></p>
-        <% end %>
-      </p>
-      <p><i class="fa-solid fa-house"></i> <%= room.square %> m²</p>
+  <div class="container-xxl testimonial mt-5 py-5 bg-dark">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+      <h6 class="section-title text-center text-white text-uppercase">what others say about us</h6>
     </div>
-    <div class='ms-2 col-2 border-end'>
-      <h5 class='text-secondary'>Price</h5>
-      <h5><%= number_to_currency(room.price) %></h5>
-      <h5 class='text-secondary'>Count</h5>
-      <h5><%= room.active_rooms_count %></h5>
-    </div>
-    <% if @user.owner? %>
-      <div class='ms-1 col d-flex align-items-center justify-content-center flex-column gap-2 custom-bg-warning'>
-        <p><%= link_to 'Edit',  edit_hotel_room_path(@hotel, room), class: "btn btn-warning btn-sm text-decoration-none fs-6 fw-light text-white link-dark " %></p>
-        <p><%= link_to 'Delete', hotel_room_path(@hotel, room), data: { "turbo-method": :delete }, class: 'btn btn-danger btn-sm' %></p>
-      </div>
+    <% if room.reviews.empty?  %>
+      <h4 class='text-secondary text-center'>Reviews not found</h4>
     <% else %>
-      <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-green'>
-        <% if room.active_rooms_count >= 1 %>
-          <h4><%= link_to 'Reservе', reservations_path(room_id: room.id, user_id: current_user.id), data: { "turbo-method": :post }, class: "text-decoration-none fs-5 fw-light text-primary link-dark" %></h4>
-        <% else %>
-          <h4>All rooms are reserved</h4>
-        <% end %>
-      </div>
+      <% room.reviews.limit(3).each do |r| %>
+        <div class="container">
+          <div class="testimonial-carousel py-2">
+            <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
+              <p><%= r.comment %></p>
+              <div class="d-flex align-items-center">
+                <div class="ps-2">
+                  <h6 class="fw-bold mb-1"><%= r.user.first_name %> <%= r.user.last_name %></h6>
+                  <small>Rating: <%= r.rating %></small>
+                </div>
+              </div>
+              <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
-<% end %>
-<% @hotel.rooms.each do |room| %>
-  <section class="section-medium section-arrow--bottom-center section-arrow-primary-color bg-primary">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-white text-center">
-          <h2 class="section-title "> What Others Say About Us</h2>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section-primary t-bordered">
-    <div class="container">
-      <div class='d-flex gap-5 justify-content-start flex-wrap'>
-        <% if room.reviews.empty?  %>
-          <h4 class='text-center'>Reviews not found</h4>
-        <% else %>
-          <% room.reviews.each do |r| %>
-            <div>
-              <h6><%= r.comment %></h6>
-              <p class='text-muted'>Rating: <%= r.rating %> </p>
-              <p class='text-muted'><%= r.user.first_name %> <%= r.user.last_name %></p>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </section>
 <% end %>

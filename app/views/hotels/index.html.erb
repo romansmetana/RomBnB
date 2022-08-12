@@ -1,50 +1,122 @@
-<h4 class='text-center text-secondary'><%= pluralize(@hotels.count, "hotel") %> found</h4>
-
-<%= link_to "Search hotels", new_search_path %>
-<p>Sort | <%= sortable "price" %></p>
-<% @hotels.each do |hotel| %>
-  <div class='d-flex container mt-5 container-border p-4'>
-    <div class='me-4 col-3 d-flex align-items-center'>
-      <% if hotel.main_image? %>
-        <%= image_tag("#{hotel.main_image}") %>
-      <% else %>
-        <%= image_tag(hotel.images[0].url) %>
-      <% end %>
-    </div>
-    <div class='col-9 text-dark d-flex justify-content-between'>
-      <div>
-        <div class='mb-auto p-2'>
-          <h3><%=link_to hotel.name, hotel_path(hotel) %></h3>
-          <p class='font-weight-light text-wrap w-75'><%= hotel.description %></p>
-        </div>
-        <div class="p-2 text-secondary">
-          <h6><%= hotel.address %></h6>
-          <h6><%= hotel.city %></h6>
-        </div>
-        <div class='d-flex flex-wrap w-75'>
-          <%= render hotel.labels %>
+<div class="container-xxl bg-white p-0">
+  <div class="container-xxl py-5">
+    <div class="container mb-5">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
+          <h1 class="mb-4">Welcome to <span class="text-primary">RomBnB</span></h1>
+          <div class="row g-3 pb-4">
+            <div class="col-sm-4">
+              <div class="border rounded p-1">
+                <div class="border rounded text-center p-4">
+                  <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
+                  <h2 class="mb-1" data-toggle="counter-up"><%= Hotel.count %></h2>
+                  <p class="mb-0">Hotels</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="border rounded p-1">
+                <div class="border rounded text-center p-4">
+                  <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
+                  <h2 class="mb-1" data-toggle="counter-up"><%= Room.count %></h2>
+                  <p class="mb-0">Rooms</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="border rounded p-1">
+                <div class="border rounded text-center p-4">
+                  <i class="fa fa-users fa-2x text-primary mb-2"></i>
+                  <h2 class="mb-1" data-toggle="counter-up"><%= Resrvation.all.count %></h2>
+                  <p class="mb-0">Clients</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-      <h4>Rating: <%= Review.where(room_id: hotel.rooms.map{|room| room.id}).average(:rating).to_i %></h4>
-        <p class='p-2'>Rooms:</p>
-        <% if hotel.rooms.empty? %>
-          <h4>Haven't any rooms</h4>
-        <% else %>
-          <% hotel.rooms.minmax{ |a, b| a.price <=> b.price }.each do |room| %>
-            <h5 class='text-secondary p-2'><%= cycle('From: ','The most expensive: ') %> <span class='text-dark fw-light'><%= number_to_currency(room.price) %></span></h5>
-          <% end %>
-        <% end %>
-        <% if @user.owner? %>
-          <div class='d-flex gap-3'>
-            <p><%= link_to "Add room", new_hotel_room_path(hotel_id: hotel.id), class: 'btn btn-success btn-sm text-decoration-none text-white'%></p>
-            <p><%= link_to "Edit", edit_hotel_path(hotel), class: 'btn btn-warning btn-sm text-decoration-none text-white'%></p>
-            <p><%= link_to 'Delete', hotel_path(hotel), data: { "turbo-method": :delete }, class: 'btn btn-danger btn-sm' %></p>
+    </div>
+  </div>
+  <div class="container mb-5">
+    <div class="text-center">
+      <h6 class="section-title text-center text-primary text-uppercase">Searching</h6>
+    </div>
+    <div class="bg-white shadow" style="padding: 35px;">
+      <%= form_for @search do |f| %>
+        <div class="row g-2">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">
+                <%= f.text_field :name, placeholder: "Hotel name" %>
+              </div>
+              <div class="col-3 d-flex align-items-center">
+                <%= f.text_field :city, placeholder: "City" %>
+              </div>
+              <div class="col-1 d-flex align-items-center">
+                <%= f.text_field :capacity, size: 1, placeholder: "Capacity" %>
+              </div>
+              <div class="col-3 d-flex align-items-center ps-0 gap-2">
+                <%= f.text_field :min_price, size: 5, placeholder: "Min. price" %>
+                <%= f.text_field :max_price, size: 5, placeholder: "Max. price" %>
+              </div>
+              <div class='col-2 d-flex align-items-center'>
+                <%= f.submit "Search", class: "btn btn-primary" %>
+              </div>
+            </div>
           </div>
-        <% end %>
-        <h4 class='btn btn-info' ><%= link_to "Show more", hotel_path(hotel), class: 'text-decoration-none text-white'%></h4>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% @hotels.each do |hotel| %>
+    <div class="mt-5 container-xxl py-5">
+      <div class="container">
+        <div class="text-center">
+          <h1 class="mb-5">Explore Our <span class="text-warning text-uppercase">Hotels</span></h1>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-12 col-md-6">
+            <div class="room-item shadow rounded overflow-hidden">
+              <div class="p-4 mt-2">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div>
+                    <img class="img-fluid border-end me-3 pe-3" src="https://fakeimg.pl/300x200/" alt="">
+                  </div>
+                  <div class='ms-3'>
+                    <h5 class="mb-3"><%=link_to hotel.name, hotel_path(hotel) %></h5>
+                    <p class="text-body text-wrap w-75"><%= hotel.description %></p>
+                    <p class="text-body text-wrap w-75"><%= hotel.address %></p>
+                    <p class="text-body text-wrap w-75"><%= hotel.city %></p>
+                    <div class="d-flex flex-wrap w-75">
+                      <%= render hotel.labels %>
+                    </div>
+                  </div>
+                  <div class="ps-2">
+                    <span>Rating: <%= Review.where(room_id: hotel.rooms.map{|room| room.id}).average(:rating).to_i %> <small class="fa fa-star text-warning"></small></span>
+                    <% if hotel.rooms.empty? %>
+                      <p>Haven't any rooms</p>
+                    <% else %>
+                      <% hotel.rooms.minmax{ |a, b| a.price <=> b.price }.each do |room| %>
+                        <p class='text-secondary p-2'><%= cycle('The cheapest room: ','The most expensive: ') %> <span class='text-dark fw-light'><%= number_to_currency(room.price) %></span></p>
+                      <% end %>
+                    <% end %>
+                    <% if @user.owner? %>
+                      <div class="d-flex justify-content-between">
+                        <p><%= link_to '<i class="fa-solid fa-plus"></i>'.html_safe, new_hotel_room_path(hotel_id: hotel.id), class: 'btn btn-success btn-sm text-decoration-none text-white'%></p>
+                        <p><%= link_to "Edit", edit_hotel_path(hotel), class: 'btn btn-sm btn-dark rounded me-2'%></p>
+                        <p><%= link_to '<i class="fa-solid fa-trash-can"></i>'.html_safe, hotel_path(hotel), data: { "turbo-method": :delete }, class: 'btn btn-sm btn-danger rounded' %></p>
+                      </div>
+                    <% end %>
+                    <%= link_to "View More", hotel_path(hotel), class: "btn btn-sm btn-primary rounded py-2 px-4" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 <% end %>
-<h5 class='d-flex justify-content-center'><%== pagy_nav(@pagy) %></h5>
+<div class='d-flex justify-content-center'><%== pagy_nav(@pagy) %></div>

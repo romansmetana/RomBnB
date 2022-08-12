@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-  include ReservationsHelper
   before_action :set_room, only: %i[create]
 
   def new
@@ -32,6 +31,5 @@ class ReviewsController < ApplicationController
   def change_reservation_status
     reservation = Resrvation.active.find_by(id: current_user.resrvations.map(&:id).flatten)
     reservation.update(status: 1)
-    rooms_count(reservation.room.id)
   end
 end
