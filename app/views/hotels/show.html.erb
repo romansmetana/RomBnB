@@ -71,7 +71,7 @@
     <% if room.reviews.empty?  %>
       <h4 class='text-secondary text-center'>Reviews not found</h4>
     <% else %>
-      <% room.reviews.limit(3).each do |r| %>
+      <% room.reviews.limit(3).order(Arel.sql("created_at DESC")).each do |r| %>
         <div class="container">
           <div class="testimonial-carousel py-2">
             <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
