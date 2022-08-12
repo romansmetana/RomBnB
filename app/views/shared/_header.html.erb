@@ -1,27 +1,35 @@
-<header class="bg-info">
-  <div class='container d-flex align-items-center' style="height: 4.3rem">
-    <div class="w-100 d-flex flex-wrap align-items-center justify-content-around">
-      <div class="nav col-md-4  mb-2 justify-content-start mb-md-0 gap-3">
-        <li><%= link_to 'Home', root_path, class: 'h4 text-color  text-decoration-none' %></li>
-        <% if @user.owner? %>
-          <li><%= link_to 'AllBookings', reservations_path, class: 'h4 text-color  text-decoration-none' %></li>
-        <% else %>
-          <li><%= link_to 'MyBooking', reservations_path, class: 'h4 text-color  text-decoration-none' %></li>
-        <% end %>
-      </div>
-      <div class="nav col-md-4 mb-2 justify-content-center mb-md-0 gap-3">
-        <li><%= link_to 'RomBnB', root_path, class: 'display-6 fw-bold text-white text-decoration-none' %></li>
-      </div>
-      <div class="col-md-4 own-drop dropdown d-flex align-items-center justify-content-end gap-3">
-        <h6 class='mb-0'><%= link_to 'Add hotel', new_hotel_path(@hotel), class: 'text-white link-secondary  text-decoration-none' if @user.owner? %></h6>
-        <a class="own-drop-link tn dropdown-toggle text-white" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          <div class='h5 d-inline text-white'><%= image_tag(@user.avatar.url, class: 'user_avatar_size rounded-circle') if @user.avatar? %> <%= @user.first_name %> <%= @user.last_name %></div>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li><%= link_to "Edit profile", edit_user_path(@user), class: "dropdown-item" %></li>
-          <li><%= link_to 'Logout', destroy_user_session_path, class: "dropdown-item" %></li>
-        </ul>
-      </div>
+<div class="container-fluid bg-info px-0">
+  <div class="row gx-0">
+    <div class="h1 col-lg-3 bg-info d-none d-lg-block">
+      <%= link_to 'RomBnB', root_path, class: "text-white navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center"%>
+    </div>
+    <div class="col-lg-9">
+      <nav class="navbar navbar-expand-lg bg-info navbar-dark p-3 p-lg-0">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+          <div class="navbar-nav mr-auto py-0 w-75 justify-content-center">
+            <%= link_to 'Home', root_path, class: 'h5 nav-item nav-link' %>
+            <% if @user.owner? %>
+              <%= link_to 'AllBookings', "#{reservations_path}?status=active", class: 'h5 nav-item nav-link' %>
+            <% else %>
+              <%= link_to 'MyBooking', "#{reservations_path}?status=active", class: 'h5 nav-item nav-link' %>
+            <% end %>
+            <a href="#" class="h5 nav-item nav-link">About</a>
+          </div>
+          <div class="navbar-nav mr-auto py-0 w-25 justify-content-center">
+            <div class="col-md-4 own-drop dropdown d-flex align-items-center justify-content-end">
+              <h6 class='mb-0'><%= link_to 'Add hotel', new_hotel_path(@hotel), class: 'h5 nav-item nav-link' if @user.owner? %></h6>
+              <a class="own-drop-link tn dropdown-toggle text-white" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class='h5 d-inline text-white'><%= image_tag(@user.avatar.url, class: 'user_avatar_size rounded-circle') if @user.avatar? %> <%= @user.first_name %> <%= @user.last_name %></div>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><%= link_to "Edit profile", edit_user_path(@user), class: "dropdown-item" %></li>
+                <li><%= link_to 'Logout', destroy_user_session_path, class: "dropdown-item" %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
   </div>
-</header>
+</div>
+

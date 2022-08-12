@@ -1,5 +1,7 @@
 FactoryBot.define do
-  factory :resrvation do
+  factory :review do
+    comment { '' }
+    rating {}
     user_id {}
     room_id {}
   end

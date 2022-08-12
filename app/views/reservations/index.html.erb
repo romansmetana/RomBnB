@@ -1,7 +1,8 @@
+<h6 class='text-center'><%= link_to 'Archived Booking', "#{reservations_path}?status=archived", class: 'text-decoration-none' unless params[:status] == "archived" %></h6>
 <% if @reservations.empty? %>
   <h3 class='alert alert-warning text-center'>You don't have any reservations</h3>
   <% unless @user.owner? %>
-    <h6 class='text-center text-secondary'>To book a room: <%= link_to "booking", root_path, class: 'text-decoration-none' %></h6>
+    <h6 class='text-center text-secondary'>Book a room: <%= link_to "booking", root_path, class: 'text-decoration-none' %></h6>
   <% end %>
 <% else %>
   <div class='container'>
@@ -11,34 +12,43 @@
         <h6 class='text-secondary'>Last name: <span class='text-dark h5'><%= r.user.last_name %></span></h6>
         <h6 class='text-secondary'>E-mail: <span class='text-dark fw-light'> <%= r.user.email %></span></h6>
       </div>
-      <div>
-        <h6 class='text-center'><%= r.room.hotel.name %></span></h6>
-      <div class="d-flex container-my container-border mb-5">
-        <div class='col-4 border-end'>
-          <h3 class='mb-auto me-3'><%= r.room.name  %></h3>
-          <p>
-            <% if r.room.single_bed %>
-              <p><i class="fa-solid fa-bed"></i> x <%= r.room.single_bed %></p>
+      <div class='border-bottom mb-3'>
+        <h5 class='text-center'><%= r.room.hotel.name %></h5>
+        <div class="d-flex container-my container-border mb-5">
+          <div class='col-4 border-end'>
+            <h3 class='mb-auto me-3'><%= r.room.name  %></h3>
+            <p>
+              <% if r.room.single_bed %>
+                <p><i class="fa-solid fa-bed"></i> x <%= r.room.single_bed %></p>
+              <% end %>
+            </p>
+            <p>
+              <% if r.room.double_bed %>
+                <p><%= show_svg('double-bed.svg') %> x <%= r.room.double_bed %></p>
+              <% end %>
+            </p>
+            <p><i class="fa-solid fa-house"></i> <%= r.room.square %> m²</p>
+          </div>
+          <div class='ms-2 col-2 border-end'>
+            <h5 class='text-secondary'>Price</h5>
+            <h5><%= number_to_currency(r.room.price) %></h5>
+            <% if r.status == "active" %>
+              <h5 class='text-secondary'>Count</h5>
+              <h5><%= r.room.active_rooms_count %></h5>
             <% end %>
-          </p>
-          <p>
-            <% if r.room.double_bed %>
-              <p><%= show_svg('double-bed.svg') %> x <%= r.room.double_bed %></p>
-            <% end %>
-          </p>
-          <p><i class="fa-solid fa-house"></i> <%= r.room.square %> m²</p>
-        </div>
-        <div class='ms-2 col-2 border-end'>
-          <h5 class='text-secondary'>Price</h5>
-          <h5><%= number_to_currency(r.room.price) %></h5>
-          <h5 class='text-secondary'>Count</h5>
-          <h5><%= r.room.count %></h5>
-        </div>
-        <div class='ms-1 col d-flex align-items-center justify-content-center custom-bg-danger'>
-          <h6><%= link_to 'Cancel', reservation_path(r),data: { "turbo-method": :delete }, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
+          </div>
+          <% if r.status == "active" %>
+            <div class='ms-1 col d-flex align-items-center justify-content-center flex-column custom-bg-warning'>
+              <h6><%= link_to 'Cancel', reservation_path(r),data: { "turbo-method": :delete }, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
+              <h6><%= link_to 'Your review', new_review_path, class: "text-decoration-none fs-5 fw-bold text-primary link-dark" %></h6>
+            </div>
+          <% else %>
+            <div class='ms-1 col d-flex align-items-center justify-content-center flex-column'>
+              <h5><%= link_to 'Book again', hotel_path(r.room.hotel) unless @user.owner? %></h5>
+            </div>
+          <% end %>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 <% end %>

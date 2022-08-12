@@ -1,0 +1,18 @@
+<%= form_with model: @review do |f| %>
+  <div class='container'>
+    <div class='d-flex justify-content-center gap-5'>
+      <div class="form-outline mb-4">
+        <%= f.label :comment, class: 'form-label h5 d-block' %>
+        <%= f.text_area :comment, autofocus: true, presence: true, class: "form-control" %>
+      </div>
+      <div class="form-outline mb-4">
+        <%= f.label :rating, class: 'form-label h5 d-block' %>
+        <%= f.number_field :rating, autofocus: true, presence: true, class: "form-control" %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "Add", class: "btn btn-info btn-block mb-3 mt-3", style: 'width: 100px' %>
+    </div>
+  </div>
+</div>
+<% end %>
