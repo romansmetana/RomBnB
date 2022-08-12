@@ -1,5 +1,4 @@
 class ReservationsController < ApplicationController
-  include ReservationsHelper
   def index
     @reservations = if params[:status] == 'active'
                       policy_scope(Resrvation.active)
@@ -9,15 +8,13 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    if session[:reservation_id]
+    if current_user.resrvations.active.any?
       flash[:warning] = 'You have already booked'
-      redirect_to reservations_path
+      redirect_to root_path
     else
       authorize Resrvation
       @reservation = Resrvation.create(reserv_params)
       if @reservation.save
-        session[:reservation_id] = @reservation.id
-        rooms_count(@reservation.room_id)
         redirect_to root_path
         flash[:success] = 'Your reservation was created'
       end
@@ -28,10 +25,7 @@ class ReservationsController < ApplicationController
     authorize Resrvation
     @reservation = Resrvation.find(params[:id])
     if @reservation.status == 'active'
-      room_id = @reservation.room_id
       if @reservation.destroy
-        session[:reservation_id] = nil
-        rooms_count(room_id)
         redirect_to root_path
         flash[:danger] = 'You have deleted your reservation'
       end

@@ -32,7 +32,6 @@ class ReviewsController < ApplicationController
   def change_reservation_status
     reservation = Resrvation.active.find_by(id: current_user.resrvations.map(&:id).flatten)
     reservation.update(status: 1)
-    session[:reservation_id] = nil
     rooms_count(reservation.room.id)
   end
 end

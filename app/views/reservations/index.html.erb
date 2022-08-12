@@ -34,7 +34,7 @@
             <h5><%= number_to_currency(r.room.price) %></h5>
             <% if r.status == "active" %>
               <h5 class='text-secondary'>Count</h5>
-              <h5><%= r.room.count %></h5>
+              <h5><%= r.room.active_rooms_count %></h5>
             <% end %>
           </div>
           <% if r.status == "active" %>
