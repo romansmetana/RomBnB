@@ -71,18 +71,25 @@
   </div>
   <% @hotels.each do |hotel| %>
     <div class="mt-5 container-xxl py-5">
-      <div class="container">
-        <div class="text-center">
-          <h1 class="mb-5">Explore Our <span class="text-warning text-uppercase">Hotels</span></h1>
-        </div>
-          <p>Sorting by: <%= sortable "price" %></p>
-        <div class="row g-4">
+      <div class="text-center">
+        <h1 class="mb-5">Explore Our <span class="text-warning text-uppercase">Hotels</span></h1>
+      </div>
+      <p>Sorting by: <%= sortable "price" %></p>
+      <div class="row g-4">
+        <div class="container">
           <div class="col-lg-12 col-md-6">
             <div class="room-item shadow rounded overflow-hidden">
               <div class="p-4 mt-2">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                   <div>
-                    <img class="img-fluid border-end me-3 pe-3" src="https://fakeimg.pl/300x200/" alt="">
+                  <%= binding.pry %>
+                    <% if hotel.main_image? %>
+                      <%= image_tag("#{hotel.main_image}", class: "img-fluid border-end me-3 pe-3") %>
+                    <% elsif hotel.images.any? %>
+                      <%= image_tag(hotel.images[0].url, class: "img-fluid border-end me-3 pe-3") %>
+                    <% else %>
+                      <img class="img-fluid border-end me-3 pe-3" src="https://fakeimg.pl/300x200/" alt="">
+                    <% end %>
                   </div>
                   <div class='ms-3'>
                     <h5 class="mb-3"><%=link_to hotel.name, hotel_path(hotel) %></h5>
