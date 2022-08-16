@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_12_140547) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "hotels", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -19,13 +22,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_140547) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.text "images"
+    t.text "images", array: true
     t.text "main_image"
   end
 
   create_table "hotels_labels", id: false, force: :cascade do |t|
-    t.integer "hotel_id", null: false
-    t.integer "label_id", null: false
+    t.bigint "hotel_id", null: false
+    t.bigint "label_id", null: false
     t.index ["hotel_id", "label_id"], name: "index_hotels_labels_on_hotel_id_and_label_id", unique: true
   end
 
@@ -37,8 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_140547) do
   end
 
   create_table "resrvations", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "room_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
@@ -49,8 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_140547) do
   create_table "reviews", force: :cascade do |t|
     t.text "comment"
     t.integer "rating"
-    t.integer "user_id", null: false
-    t.integer "room_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_reviews_on_room_id"
@@ -65,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_140547) do
     t.integer "count"
     t.integer "double_bed"
     t.integer "single_bed"
-    t.integer "hotel_id", null: false
+    t.bigint "hotel_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hotel_id"], name: "index_rooms_on_hotel_id"
