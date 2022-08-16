@@ -82,7 +82,6 @@
               <div class="p-4 mt-2">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                   <div>
-                  <%= binding.pry %>
                     <% if hotel.main_image? %>
                       <%= image_tag("#{hotel.main_image}", class: "img-fluid border-end me-3 pe-3") %>
                     <% elsif hotel.images.any? %>
