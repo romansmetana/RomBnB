@@ -7,7 +7,7 @@
       </div>
       <div class="form-outline mb-4">
         <%= f.label :rating, class: 'form-label h5 d-block' %>
-        <%= f.number_field :rating, autofocus: true, presence: true, class: "form-control" %>
+        <%= f.number_field :rating, autofocus: true, presence: true, min: 0, max: 5, class: "form-control" %>
       </div>
     </div>
     <div class="actions">
