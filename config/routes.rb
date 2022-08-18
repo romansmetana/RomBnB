@@ -2,7 +2,6 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  resources :searches, only: %i[new create show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :users, only: %i[index edit update]
   resources :hotels do

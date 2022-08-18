@@ -2,7 +2,6 @@ class HotelsController < ApplicationController
   before_action :set_hotel, except: %i[index new create]
   before_action :set_labels, only: %i[new edit]
   def index
-    @search = Search.new
     @pagy, @hotels = pagy(policy_scope(search_hotels(params[:name], params[:city],
                                                      params[:capacity], params[:min_price],
                                                      params[:max_price])))
