@@ -9,6 +9,6 @@ class Room < ApplicationRecord
   validates :count, presence: true, length: { minimum: 1 }
 
   def active_rooms_count
-    self.count - Resrvation.where(room_id: self.id, status: 0).count                                                 
+    count - Resrvation.where(room_id: id, status: 0).count
   end
 end

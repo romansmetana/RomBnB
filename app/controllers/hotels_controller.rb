@@ -3,7 +3,9 @@ class HotelsController < ApplicationController
   before_action :set_labels, only: %i[new edit]
   def index
     @search = Search.new
-    @pagy, @hotels = pagy(policy_scope(Hotel.includes(:rooms).order("#{params[:sort]} #{params[:direction]}").references(:rooms)))
+    @pagy, @hotels = pagy(policy_scope(search_hotels(params[:name], params[:city],
+                                                     params[:capacity], params[:min_price],
+                                                     params[:max_price])))
   end
 
   def show; end
@@ -106,5 +108,18 @@ class HotelsController < ApplicationController
 
   def sort_direction
     %w[ask desk].include?(params[:direction] || 'ask')
+  end
+
+  def search_hotels(name, city, capacity, min_price, max_price)
+    hotels = Hotel.all
+    return hotels unless name || city || capacity || min_price || max_price
+
+    hotels = hotels.where(['hotels.name LIKE ?', "%#{name}%"]) unless name.empty?
+    hotels = hotels.where(['hotels.city LIKE ?', "%#{city}%"]) unless city.empty?
+    hotels = hotels.includes(:rooms).where(['rooms.capacity >= ?', capacity]).references(:rooms) unless capacity.empty?
+    hotels = hotels.includes(:rooms).where(['rooms.price >= ?', min_price]).references(:rooms) unless min_price.empty?
+    hotels = hotels.includes(:rooms).where(['rooms.price <= ?', max_price]).references(:rooms) unless max_price.empty?
+
+    hotels
   end
 end

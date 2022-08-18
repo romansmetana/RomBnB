@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
   end
 
   def set_room
-    @room = Room.find_by(id: current_user.resrvations.map { |r| r.room.id }.flatten)
+    @room = Room.find_by(id: current_user.resrvations.active.map { |r| r.room.id }.flatten)
   end
 
   def change_reservation_status
